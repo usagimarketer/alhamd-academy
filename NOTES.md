@@ -1,0 +1,107 @@
+# AlHamd Online Academy - Project Notes
+
+> Naye Claude chat ya account mein sirf yeh file paste karein aur kahein:
+> "Yeh mera project hai. Yahan se aage chalo." Phir jis file par kaam karna ho woh file paste karein.
+
+Last updated: 2026-11-09
+
+---
+
+## 1. Project kya hai
+Ek single-file website (HTML + CSS + JS, sab ek hi file mein) jo **AlHamd Online Academy** ki hai.
+Is mein ek **Paper Maker** tool hai jis se MCQ aur long/short question papers print ke liye banaye jate hain.
+
+- Hosting: **GitHub repo -> Netlify** (auto deploy, jab bhi push ho site update hoti hai)
+- Koi framework ya build step nahi. Bas `index.html`.
+
+## 2. Files
+
+| File | Kaam |
+|---|---|
+| `index.html` | **Live website.** Netlify yehi serve karta hai. Paper Maker access code se locked. |
+| `website-ARTIFACT-claude-link.html` | Claude link wali copy (Claude account se request/manzoori wala lock). |
+| `website-standalone-no-lock.html` | Naya home page, bina kisi lock ke. |
+| `paper-backup.json` | Paper data: 15 MCQs, logo, settings. App ke **Restore** se wapas aata hai. |
+| `README.txt` | Backup ki purani ittela. |
+| Fonts (`.ttf`) | Alag sambhale hue hain, repo mein nahi. |
+
+Note: `index.html` aur `website-for-hosting-index.html` bilkul same file hain.
+
+## 3. Website ka structure (`index.html`)
+Har page ek `<section class="pg" id="p-...">` hai, `go('name')` function se badalta hai.
+
+| Section id | Page |
+|---|---|
+| `p-home` | Home page (AlHamd Online Academy) |
+| `p-paper` | Paper Maker (main tool) |
+| `p-layout` | Layout / page settings |
+| `p-gate` | Access code wali screen |
+| `p-info` | Institute / info |
+| `p-latex` | LaTeX compiler |
+| `p-q1` | Questions editor |
+| `p-prev` | Preview / print |
+
+### Zaroori functions
+- Navigation: `go`, `gateIt`
+- Lock: `applyLock`, `renderGate`, `sha` (code ka SHA hash `CODE_HASH` se compare hota hai)
+- Paper: `renderPaper`, `renderSecs`, `renderQ`, `addQ`, `addSec`, `printOnly`, `xpage`
+- Data: `save` (localStorage key `pm2`), `norm`, `hydrate`, `loadSample`
+- LaTeX: `lxCompile`, `lxSample`, `lxCopy`
+- Fonts: `addFont`, `regFont`
+
+### Bahar se kya load hota hai
+- Google Fonts: Noto Nastaliq Urdu, Amiri, Noto Naskh Arabic, Carlito, Caladea, EB Garamond, Old Standard TT, Poppins
+- MathJax 3.2.2 (cdnjs) math/LaTeX ke liye
+
+## 4. Paper Maker ka data (`paper-backup.json`)
+Keys: `lang, lx, secs, inst, logo, logoSize, layout, mcq, det, style, font, ufont, stu, q`
+
+- `q` = MCQs ki list. Har item: `t` (sawal, LaTeX `$...$` chalta hai), `o` (4 options), `a` (sahi option ka index), `m` marks, `img`
+- `inst` = institute name/campus/branch/address + unke font sizes
+- `layout` = page size, orientation, margin, copies, border, watermark, font size, OMR, key waghera
+- `secs` = long/short sections (heading, marks, attempt, items)
+- `stu` = student details fields (name, roll, class, section)
+
+## 5. Access code (lock)
+- Paper Maker kholne ke liye code chahiye, baqi site sab dekh sakte hain.
+- Code ka sirf **hash** `index.html` mein hai, code khud nahi.
+- Browser mein unlock `localStorage` key `pm_unlock` mein yaad rehta hai.
+- **Code yahan mat likhein, khaaskar agar repo public ho.**
+- Yeh lock sirf client-side hai. "View Source" se kamzor ho sakta hai. Asal security nahi.
+- Code kho jaye to Claude se naya code banwa kar `CODE_HASH` badal dein.
+
+## 6. Deploy ka tareeqa
+1. Change `index.html` mein karein
+2. Local mein browser mein khol kar check karein
+3. GitHub par commit + push
+4. Netlify khud deploy kar dega (Deploys tab mein status dekhein)
+
+Repo ka suggested layout:
+```
+/index.html          <- live site
+/NOTES.md            <- yeh file
+/backup/             <- baqi backups (private repo mein behtar)
+```
+
+## 7. Ab tak ka kaam (DONE)
+- [x] Home page + Paper Maker bana
+- [x] MCQ, long/short sections, LaTeX support
+- [x] Urdu/English fonts, logo, institute header
+- [x] Access code lock
+- [x] 15 MCQs ka sample data
+- [x] Backup v2 (2026-11-09)
+
+## 8. Aage ka kaam (TODO)
+- [ ] (yahan likhein)
+- [ ] (yahan likhein)
+- [ ] (yahan likhein)
+
+## 9. Known masle / notes
+- (yahan likhein)
+
+## 10. Claude limit ke liye tareeqa
+- Naya chat shuru karte waqt: yeh file + sirf wohi file paste karein jis mein change chahiye
+- `index.html` bohat bari hai (~100 KB). Poori mat paste karein, sirf wohi function/section jo badalna hai
+- Ek message mein poori request likhein
+- Limit khatam hone se pehle kahein: "ab tak ka summary likho" aur sections 7-9 update kar lein
+- Har bade change ke baad `index.html` ka backup le lein
