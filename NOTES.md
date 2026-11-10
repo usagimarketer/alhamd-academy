@@ -93,6 +93,7 @@ Repo ka suggested layout:
 - [x] GitHub Claude se connect (2026-11-10), ab Claude seedha repo mein push kar sakta hai
 - [x] Upar wali brand patti (logo + naam + "Study with USama") hata di (2026-11-10). Hero banner mein logo/naam rehta hai
 - [x] Hero banner ki neeche wali line ("Study with USama • Notes, Guess Papers...") hata di (2026-11-10)
+- [x] Hero banner: logo 150px (mobile 110px) aur naam 48px (mobile 34px) bara kiya (2026-11-10)
 - [x] Backup v3 (2026-11-10)
 
 ## 8. Aage ka kaam (TODO)
