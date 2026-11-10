@@ -3,7 +3,7 @@
 > Naye Claude chat ya account mein sirf yeh file paste karein aur kahein:
 > "Yeh mera project hai. Yahan se aage chalo." Phir jis file par kaam karna ho woh file paste karein.
 
-Last updated: 2026-11-09
+Last updated: 2026-11-10
 
 ---
 
@@ -90,11 +90,14 @@ Repo ka suggested layout:
 - [x] Access code lock
 - [x] 15 MCQs ka sample data
 - [x] Backup v2 (2026-11-09)
+- [x] GitHub Claude se connect (2026-11-10), ab Claude seedha repo mein push kar sakta hai
+- [x] Upar wali brand patti (logo + naam + "Study with USama") hata di (2026-11-10). Hero banner mein logo/naam rehta hai
+- [x] Backup v3 (2026-11-10)
 
 ## 8. Aage ka kaam (TODO)
-- [ ] (yahan likhein)
-- [ ] (yahan likhein)
-- [ ] (yahan likhein)
+- [ ] Netlify project public hone ki tasdeeq (incognito mein test)
+- [ ] Paper ke short aur long questions add karna (75 marks ka poora paper)
+- [ ] Notes, Text Books, Guess, Pairing, Past Papers pages mein title + link add/edit/delete ka option
 
 ## 9. Known masle / notes
 - (yahan likhein)
