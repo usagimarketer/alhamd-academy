@@ -531,11 +531,11 @@ const TB=['Punjab Text Books','Sindh Text Books','KPK Text Books','Federal Text 
 const SITE=[
  {t:'Text Books',c:'#4caf50',k:'📚',l:TB},
  {t:'Punjab Notes',c:'#ff9800',k:'🎓',l:CL('Class Notes')},
- {t:'Guess Papers',c:'#2196f3',k:'❓',l:CL('Class Guess')},
+ {t:'Test Series',c:'#2196f3',k:'❓',l:CL('Test Series')},
  {t:'Pairing Schemes',c:'#9c27b0',k:'📋',l:CL('Class Pairing')},
  {t:'Past Papers (Punjab)',c:'#e91e63',k:'📑',l:CL('Past Papers')}];
 const PMF=[['Paper Settings',()=>go('paper')],['Questions',()=>go('q1')],['Layout',()=>go('layout')],['Preview',()=>go('prev')],['Print / PDF',()=>$('#pr').click()],['LaTeX Compiler',()=>go('latex')],['Backup file',()=>exp()],['Restore',()=>$('#imp').click()]];
-const NAV=[{t:'Text Books',l:TB},{t:'Notes',l:CL('Class Notes')},{t:'Pairing Schemes',l:CL('Class Pairing')},{t:'Guess Papers',l:CL('Class Guess')},{t:'Past Papers',l:CL('Past Papers')},{t:'Results',l:CL('Class Result')},{t:'Paper Maker',l:PMF}];
+const NAV=[{t:'Text Books',l:TB},{t:'Notes',l:CL('Class Notes')},{t:'Pairing Schemes',l:CL('Class Pairing')},{t:'Test Series',l:CL('Test Series')},{t:'Past Papers',l:CL('Past Papers')},{t:'Results',l:CL('Class Result')},{t:'Paper Maker',l:PMF}];
 const ALL=[...SITE,...HOME];
 TIPS.push('Naya: Paper Maker ab alag section mein hai');
 function buildSite(){const top=$('.top');top.className='top dk';
@@ -552,7 +552,7 @@ function buildSite(){const top=$('.top');top.className='top dk';
  const os=$('#site');if(os)os.remove();
  const site=document.createElement('div');site.id='site';
  const scr=i=>`document.querySelectorAll('#site .hc2')[${i}].scrollIntoView({behavior:'smooth',block:'center'})`;
- // const QK=[[0,'Text Books'],[1,'Notes'],[2,'Guess Papers'],[3,'Pairing Schemes'],[4,'Past Papers'],[5,'Paper Maker']];
+ // const QK=[[0,'Text Books'],[1,'Notes'],[2,'Test Series'],[3,'Pairing Schemes'],[4,'Past Papers'],[5,'Paper Maker']];
  const hero=`<div class="hero2"><div class="hk2"><img src="${S.logo||BRAND}" alt=""><div><h1>AlHamd Online Academy</h1></div></div><div class="cta"><button class="w" onclick="go('paper')">Paper banayein</button><button class="o" onclick="${scr(1)}">Notes dekhein</button><button class="o" onclick="${scr(4)}">Past Papers</button></div></div>`;
  site.innerHTML=hero+`<div class="trend"><span class="tb">Trending</span><span class="tt" id="tt"></span></div><div class="hg">${SITE.map((c,i)=>card(c,i)).join('')}</div><div class="sec2">${circ('📄','#6a1bd1')}<div><h2>Paper Maker</h2><p>Apna paper khud banayein, dekhein aur print karein</p></div></div><div class="hg">${HOME.map((c,i)=>card(c,i+SITE.length)).join('')}</div><div class="ftr">AlHamd Online Academy &bull; Sir USama (MS Mathematics)</div>`;
  $('#p-home').prepend(site);site.querySelectorAll('.lk').forEach(b=>b.onclick=()=>ALL[+b.dataset.c].l[+b.dataset.l][1]());
