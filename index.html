@@ -131,6 +131,20 @@ nav button.on .ic{transform:translateY(-3px) scale(1.12)}
 .sub-card:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,0.15)}
 .sub-ic{font-size:48px;margin-bottom:12px;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.2))}
 .sub-name{font-size:18px;font-weight:700}
+.sidebar-wrap{display:flex;gap:20px;align-items:flex-start;margin-top:20px}
+.sidebar{flex:0 0 280px;background:var(--card);border:1px solid var(--ln);border-radius:16px;padding:16px;position:sticky;top:80px;max-height:calc(100vh - 100px);overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,0.06)}
+.sidebar h3{color:var(--pr);font-size:18px;margin:0 0 16px;border-bottom:2px solid var(--pr);padding-bottom:8px}
+.cat-btn{display:flex;justify-content:space-between;align-items:center;width:100%;background:var(--bg);color:var(--tx);border:1px solid var(--ln);padding:12px 14px;border-radius:10px;margin-bottom:8px;font:inherit;font-weight:700;cursor:pointer;transition:all 0.2s}
+.cat-btn:hover{background:var(--pr);color:#fff;border-color:var(--pr);transform:translateX(4px)}
+.cat-btn.on{background:var(--pr);color:#fff;border-color:var(--pr)}
+.cat-btn .arrow{font-size:12px;transition:transform 0.3s}
+.cat-btn.on .arrow{transform:rotate(180deg)}
+.cat-sub{display:none;flex-direction:column;gap:4px;padding:4px 0 12px 12px;border-left:2px solid var(--pr);margin-left:14px;margin-bottom:8px}
+.cat-sub.on{display:flex}
+.cat-sub button{background:none;border:0;color:var(--mu);text-align:left;padding:8px 10px;font:inherit;font-size:14px;cursor:pointer;border-radius:6px;transition:0.2s}
+.cat-sub button:hover{color:var(--pr);background:rgba(47,91,234,0.08)}
+.main-content{flex:1;min-width:0}
+@media(max-width:768px){.sidebar-wrap{flex-direction:column}.sidebar{width:100%;position:static}}
 </style>
 </head>
 <body>
@@ -594,7 +608,58 @@ function buildSite(){const top=$('.top');top.className='top dk';
  const scr=i=>`document.querySelectorAll('#site .hc2')[${i}].scrollIntoView({behavior:'smooth',block:'center'})`;
  // const QK=[[0,'Text Books'],[1,'Notes'],[2,'Test Series'],[3,'Pairing Schemes'],[4,'Past Papers'],[5,'Paper Maker']];
  const hero=`<div class="hero2"><div class="hk2"><img src="${S.logo||BRAND}" alt=""><div><h1>AlHamd Online Academy</h1></div></div><div class="cta"><button class="w" onclick="go('paper')">Paper banayein</button><button class="o" onclick="${scr(1)}">Notes dekhein</button><button class="o" onclick="${scr(4)}">Past Papers</button></div></div>`;
- site.innerHTML=hero+`<div class="trend"><span class="tb">Trending</span><span class="tt" id="tt"></span></div><div class="hg">${SITE.map((c,i)=>card(c,i)).join('')}</div><div class="sec2">${circ('📄','#6a1bd1')}<div><h2>Paper Maker</h2><p>Apna paper khud banayein, dekhein aur print karein</p></div></div><div class="hg">${HOME.map((c,i)=>card(c,i+SITE.length)).join('')}</div><div class="ftr">AlHamd Online Academy &bull; Sir USama (MS Mathematics)</div>`;
+ site.innerHTML = `<div class="sidebar-wrap">
+  <div class="sidebar">
+    <h3>📌 Categories</h3>
+    <div id="cat-list"></div>
+  </div>
+  <div class="main-content">
+    ${hero}
+    <div class="trend"><span class="tb">Trending</span><span class="tt" id="tt"></span></div>
+    <div class="hg">${SITE.map((c,i)=>card(c,i)).join('')}</div>
+    <div class="sec2">${circ('📄','#6a1bd1')}<div><h2>Paper Maker</h2><p>Apna paper khud banayein, dekhein aur print karein</p></div></div>
+    <div class="hg">${HOME.map((c,i)=>card(c,i+SITE.length)).join('')}</div>
+    <div class="ftr">AlHamd Online Academy &bull; Sir USama (MS Mathematics)</div>
+  </div>
+</div>`;
+
+const catData = [
+  {t:'Pairing Scheme', items: CL('Class Pairing')},
+  {t:'Test Series', items: CL('Test Series')},
+  {t:'Punjab Text Books', items: [['9th Text Book',INFO('9th Text Book')],['10th Text Book',INFO('10th Text Book')],['11th Text Book',INFO('11th Text Book')],['12th Text Book',INFO('12th Text Book')]]},
+  {t:'Sindh Text Books', items: [['9th Text Book',INFO('9th Text Book')],['10th Text Book',INFO('10th Text Book')]]},
+  {t:'Class Notes', items: CL('Class Notes')},
+  {t:'Results', items: CL('Class Result')},
+  {t:'Matric/SSC Past Papers', items: [['9th Past Papers',INFO('9th Past Papers')],['10th Past Papers',INFO('10th Past Papers')]]},
+  {t:'Inter/HSSC Past Papers', items: [['11th Past Papers',INFO('11th Past Papers')],['12th Past Papers',INFO('12th Past Papers')]]}
+];
+
+const catList = site.querySelector('#cat-list');
+catList.innerHTML = catData.map((c, i) => `
+  <button class="cat-btn" data-ci="${i}">${c.t} <span class="arrow">▼</span></button>
+  <div class="cat-sub" id="sub-${i}">
+    ${c.items.map(item => `<button data-cat-fn="${i}" data-item-idx="${c.items.indexOf(item)}">${item[0]}</button>`).join('')}
+  </div>
+`).join('');
+
+catList.querySelectorAll('.cat-btn').forEach(b => {
+  b.onclick = () => {
+    const i = b.dataset.ci;
+    const sub = catList.querySelector('#sub-'+i);
+    const isOpen = sub.classList.contains('on');
+    catList.querySelectorAll('.cat-sub').forEach(x => x.classList.remove('on'));
+    catList.querySelectorAll('.cat-btn').forEach(x => x.classList.remove('on'));
+    if (!isOpen) { sub.classList.add('on'); b.classList.add('on'); }
+  };
+});
+
+catList.querySelectorAll('.cat-sub button').forEach(b => {
+  b.onclick = () => {
+    const cIdx = b.dataset.catFn;
+    const iIdx = b.dataset.itemIdx;
+    catData[cIdx].items[iIdx][1](); // Call the function
+  };
+});
  $('#p-home').prepend(site);site.querySelectorAll('.lk').forEach(b=>b.onclick=()=>ALL[+b.dataset.c].l[+b.dataset.l][1]());
  let ti=0;const tt=$('#tt'),tick=()=>{tt.style.opacity=0;setTimeout(()=>{tt.textContent=TIPS[ti++%TIPS.length];tt.style.opacity=1},250)};tick();setInterval(tick,4500)}
 
