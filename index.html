@@ -565,17 +565,6 @@ function openNotes(p){
  $('#nback').onclick=()=>p.length>1?openNotes(p.slice(0,-1)):go('home');
  go('notes');window.scrollTo(0,0);
 }
-function openSyllabus(){
- if(!NOTES['Smart Syllabus']){
-  NOTES['Smart Syllabus'] = {
-   '9th Class Smart Syllabus': 'https://drive.google.com/drive/folders/placeholder9',
-   '10th Class Smart Syllabus': 'https://drive.google.com/drive/folders/placeholder10',
-   '11th Class Smart Syllabus': 'https://drive.google.com/drive/folders/placeholder11',
-   '12th Class Smart Syllabus': 'https://drive.google.com/drive/folders/placeholder12'
-  };
- }
- openNotes(['Smart Syllabus']);
-}
 const INFO=t=>()=>{if(!NOTES[t])NOTES[t]={};openNotes([t])};
 const CL=s=>['9th','10th','11th','12th'].map(x=>{const n=x+' '+s;return [n,INFO(n)]});
 const TB=['Punjab Text Books','Sindh Text Books','KPK Text Books','Federal Text Books','Balochistan Text Books','SNC Text Books'].map(n=>[n,INFO(n)]);
@@ -605,9 +594,9 @@ function buildSite(){const top=$('.top');top.className='top dk';
  const scr=i=>`document.querySelectorAll('#site .hc2')[${i}].scrollIntoView({behavior:'smooth',block:'center'})`;
  // const QK=[[0,'Text Books'],[1,'Notes'],[2,'Test Series'],[3,'Pairing Schemes'],[4,'Past Papers'],[5,'Paper Maker']];
  const hero=`<div class="hero2"><div class="hk2"><img src="${S.logo||BRAND}" alt=""><div><h1>AlHamd Online Academy</h1></div></div><div class="cta"><button class="w" onclick="go('paper')">Paper banayein</button><button class="o" onclick="${scr(1)}">Notes dekhein</button><button class="o" onclick="${scr(4)}">Past Papers</button></div></div>`;
- site.innerHTML=hero+`<div class="trend" style="cursor:pointer" onclick="openSyllabus()"><span class="tb" style="background:#6a1bd1">Smart Syllabus</span><span class="tt" style="color:var(--tx);font-weight:700">Apni class ke liye download karein 👉</span></div><div class="hg">${SITE.map((c,i)=>card(c,i)).join('')}</div><div class="sec2">${circ('📄','#6a1bd1')}<div><h2>Paper Maker</h2><p>Apna paper khud banayein, dekhein aur print karein</p></div></div><div class="hg">${HOME.map((c,i)=>card(c,i+SITE.length)).join('')}</div><div class="ftr">AlHamd Online Academy &bull; Sir USama (MS Mathematics)</div>`;
+ site.innerHTML=hero+`<div class="trend"><span class="tb">Trending</span><span class="tt" id="tt"></span></div><div class="hg">${SITE.map((c,i)=>card(c,i)).join('')}</div><div class="sec2">${circ('📄','#6a1bd1')}<div><h2>Paper Maker</h2><p>Apna paper khud banayein, dekhein aur print karein</p></div></div><div class="hg">${HOME.map((c,i)=>card(c,i+SITE.length)).join('')}</div><div class="ftr">AlHamd Online Academy &bull; Sir USama (MS Mathematics)</div>`;
  $('#p-home').prepend(site);site.querySelectorAll('.lk').forEach(b=>b.onclick=()=>ALL[+b.dataset.c].l[+b.dataset.l][1]());
- }
+ let ti=0;const tt=$('#tt'),tick=()=>{tt.style.opacity=0;setTimeout(()=>{tt.textContent=TIPS[ti++%TIPS.length];tt.style.opacity=1},250)};tick();setInterval(tick,4500)}
 
 /* ===== Paper Maker access code ===== */
 const CODE_HASH="8d5c51fd47c1736e5c60dea4a423465c1362266348c2b1af8d7fcec8d62261a2";
