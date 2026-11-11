@@ -97,8 +97,8 @@ nav button.on .ic{transform:translateY(-3px) scale(1.12)}
 .hero2::before{width:260px;height:260px;right:-70px;top:-90px}.hero2::after{width:170px;height:170px;left:-50px;bottom:-80px}
 .hero2>*{position:relative;z-index:1}
 .hero2 .hk2{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-.hero2 img{width:92px;height:92px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,.7);background:#fff;box-shadow:0 8px 20px rgba(0,0,0,.3)}
-.hero2 h1{font:700 34px/1.15 Poppins,system-ui,sans-serif;margin:0}
+.hero2 img{width:150px;height:150px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,.7);background:#fff;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.hero2 h1{font:700 48px/1.15 Poppins,system-ui,sans-serif;margin:0}
 .hero2 p{margin:6px 0 0;font-size:17px;opacity:.92}
 .hero2 .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
 .hero2 .cta button{border:0;border-radius:30px;padding:13px 22px;font:inherit;font-weight:700;cursor:pointer;transition:transform .12s}
@@ -110,7 +110,7 @@ nav button.on .ic{transform:translateY(-3px) scale(1.12)}
 .qt4 .ci{width:52px;height:52px;margin:0;box-shadow:0 6px 12px rgba(0,0,0,.2)}.qt4 .ci svg{width:28px;height:28px}
 .hc2{transition:transform .18s,box-shadow .18s}.hc2:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(30,50,120,.16)}
 .ftr{text-align:center;color:var(--mu);font-size:14px;margin:34px 0 8px;padding-top:16px;border-top:1px solid var(--ln)}
-@media(max-width:560px){.hero2{padding:24px 16px}.hero2 h1{font-size:26px}.hero2 img{width:70px;height:70px}}
+@media(max-width:560px){.hero2{padding:24px 16px}.hero2 h1{font-size:34px}.hero2 img{width:110px;height:110px}}
 @media print{.hero2,.qt4,.ftr{display:none!important}}
 
 #toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);max-width:min(92vw,520px);background:#212226;color:#fff;padding:12px 18px;border-radius:14px;font-size:16px;opacity:0;pointer-events:none;transition:.25s;z-index:30;text-align:center}
@@ -540,7 +540,6 @@ const ALL=[...SITE,...HOME];
 TIPS.push('Naya: Paper Maker ab alag section mein hai');
 function buildSite(){const top=$('.top');top.className='top dk';
  const ob=$('.brand');if(ob)ob.remove();
- const br=document.createElement('div');br.className='brand';br.innerHTML=`<img id="brandimg" src="${S.logo||BRAND}" alt=""><div><b>AlHamd Online Academy</b><small>Study with USama</small></div>`;top.before(br);
  const sv=p=>`<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
  top.innerHTML=`<button class="hm on" id="hmb" title="Home">${sv(`<path d='M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10'/>`)}</button>`+NAV.map((c,i)=>`<button data-m="${i}">${c.t} ▾</button>`).join('')+`<span style="flex:1"></span><span id="st">💾</span><input id="sri" class="sri" placeholder="Search…" hidden><button id="srb" title="Search">${sv(`<circle cx='11' cy='11' r='7'/><path d='M21 21l-5-5'/>`)}</button>`;
  const od=document.querySelector('.dd');if(od)od.remove();
@@ -554,7 +553,7 @@ function buildSite(){const top=$('.top');top.className='top dk';
  const site=document.createElement('div');site.id='site';
  const scr=i=>`document.querySelectorAll('#site .hc2')[${i}].scrollIntoView({behavior:'smooth',block:'center'})`;
  // const QK=[[0,'Text Books'],[1,'Notes'],[2,'Guess Papers'],[3,'Pairing Schemes'],[4,'Past Papers'],[5,'Paper Maker']];
- const hero=`<div class="hero2"><div class="hk2"><img src="${S.logo||BRAND}" alt=""><div><h1>AlHamd Online Academy</h1><p>Study with USama &bull; Notes, Guess Papers, Past Papers aur Paper Maker ek jagah</p></div></div><div class="cta"><button class="w" onclick="go('paper')">Paper banayein</button><button class="o" onclick="${scr(1)}">Notes dekhein</button><button class="o" onclick="${scr(4)}">Past Papers</button></div></div>`;
+ const hero=`<div class="hero2"><div class="hk2"><img src="${S.logo||BRAND}" alt=""><div><h1>AlHamd Online Academy</h1></div></div><div class="cta"><button class="w" onclick="go('paper')">Paper banayein</button><button class="o" onclick="${scr(1)}">Notes dekhein</button><button class="o" onclick="${scr(4)}">Past Papers</button></div></div>`;
  site.innerHTML=hero+`<div class="trend"><span class="tb">Trending</span><span class="tt" id="tt"></span></div><div class="hg">${SITE.map((c,i)=>card(c,i)).join('')}</div><div class="sec2">${circ('📄','#6a1bd1')}<div><h2>Paper Maker</h2><p>Apna paper khud banayein, dekhein aur print karein</p></div></div><div class="hg">${HOME.map((c,i)=>card(c,i+SITE.length)).join('')}</div><div class="ftr">AlHamd Online Academy &bull; Sir USama (MS Mathematics)</div>`;
  $('#p-home').prepend(site);site.querySelectorAll('.lk').forEach(b=>b.onclick=()=>ALL[+b.dataset.c].l[+b.dataset.l][1]());
  let ti=0;const tt=$('#tt'),tick=()=>{tt.style.opacity=0;setTimeout(()=>{tt.textContent=TIPS[ti++%TIPS.length];tt.style.opacity=1},250)};tick();setInterval(tick,4500)}
