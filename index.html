@@ -547,7 +547,11 @@ function openNotes(p){
     }).join('') + `</div>`;
   } else {
     currentSubs = Object.keys(n);
-    h += currentSubs.map((k,i)=>`<button class="lk" data-k="${i}">${esc(k)}</button>`).join('');
+    if (currentSubs.length === 0) {
+      h += `<p class="hint" style="margin-top:16px">Is hisse mein abhi notes add nahi hue. Jald add kiye jayenge.</p>`;
+    } else {
+      h += currentSubs.map((k,i)=>`<button class="lk" data-k="${i}">${esc(k)}</button>`).join('');
+    }
   }
  }
  h+=`<button class="btn" id="nback" style="margin-top:12px">⬅️ Wapas</button></div>`;
@@ -561,7 +565,7 @@ function openNotes(p){
  $('#nback').onclick=()=>p.length>1?openNotes(p.slice(0,-1)):go('home');
  go('notes');window.scrollTo(0,0);
 }
-const INFO=t=>()=>{if(NOTES[t]){openNotes([t]);return}$('#infot').textContent=t;go('info')};
+const INFO=t=>()=>{if(!NOTES[t])NOTES[t]={};openNotes([t])};
 const CL=s=>['9th','10th','11th','12th'].map(x=>{const n=x+' '+s;return [n,INFO(n)]});
 const TB=['Punjab Text Books','Sindh Text Books','KPK Text Books','Federal Text Books','Balochistan Text Books','SNC Text Books'].map(n=>[n,INFO(n)]);
 const SITE=[
