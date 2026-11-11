@@ -606,60 +606,62 @@ function buildSite(){const top=$('.top');top.className='top dk';
  const os=$('#site');if(os)os.remove();
  const site=document.createElement('div');site.id='site';
  const scr=i=>`document.querySelectorAll('#site .hc2')[${i}].scrollIntoView({behavior:'smooth',block:'center'})`;
- // const QK=[[0,'Text Books'],[1,'Notes'],[2,'Test Series'],[3,'Pairing Schemes'],[4,'Past Papers'],[5,'Paper Maker']];
  const hero=`<div class="hero2"><div class="hk2"><img src="${S.logo||BRAND}" alt=""><div><h1>AlHamd Online Academy</h1></div></div><div class="cta"><button class="w" onclick="go('paper')">Paper banayein</button><button class="o" onclick="${scr(1)}">Notes dekhein</button><button class="o" onclick="${scr(4)}">Past Papers</button></div></div>`;
- site.innerHTML = `<div class="sidebar-wrap">
-  <div class="sidebar">
-    <h3>📌 Categories</h3>
-    <div id="cat-list"></div>
-  </div>
-  <div class="main-content">
-    ${hero}
-    <div class="trend"><span class="tb">Trending</span><span class="tt" id="tt"></span></div>
-    <div class="hg">${SITE.map((c,i)=>card(c,i)).join('')}</div>
-    <div class="sec2">${circ('📄','#6a1bd1')}<div><h2>Paper Maker</h2><p>Apna paper khud banayein, dekhein aur print karein</p></div></div>
-    <div class="hg">${HOME.map((c,i)=>card(c,i+SITE.length)).join('')}</div>
-    <div class="ftr">AlHamd Online Academy &bull; Sir USama (MS Mathematics)</div>
-  </div>
-</div>`;
+ 
+ site.innerHTML = `
+   <div style="margin-bottom:20px">${hero}</div>
+   <div class="sidebar-wrap">
+     <div class="sidebar">
+       <h3>📌 Categories</h3>
+       <div id="cat-list"></div>
+     </div>
+     <div class="main-content">
+       <div class="trend"><span class="tb">Trending</span><span class="tt" id="tt"></span></div>
+       <div class="hg">${SITE.map((c,i)=>card(c,i)).join('')}</div>
+       <div class="sec2">${circ('📄','#6a1bd1')}<div><h2>Paper Maker</h2><p>Apna paper khud banayein, dekhein aur print karein</p></div></div>
+       <div class="hg">${HOME.map((c,i)=>card(c,i+SITE.length)).join('')}</div>
+       <div class="ftr">AlHamd Online Academy &bull; Sir USama (MS Mathematics)</div>
+     </div>
+   </div>`;
 
-const catData = [
-  {t:'Pairing Scheme', items: CL('Class Pairing')},
-  {t:'Test Series', items: CL('Test Series')},
-  {t:'Punjab Text Books', items: [['9th Text Book',INFO('9th Text Book')],['10th Text Book',INFO('10th Text Book')],['11th Text Book',INFO('11th Text Book')],['12th Text Book',INFO('12th Text Book')]]},
-  {t:'Sindh Text Books', items: [['9th Text Book',INFO('9th Text Book')],['10th Text Book',INFO('10th Text Book')]]},
-  {t:'Class Notes', items: CL('Class Notes')},
-  {t:'Results', items: CL('Class Result')},
-  {t:'Matric/SSC Past Papers', items: [['9th Past Papers',INFO('9th Past Papers')],['10th Past Papers',INFO('10th Past Papers')]]},
-  {t:'Inter/HSSC Past Papers', items: [['11th Past Papers',INFO('11th Past Papers')],['12th Past Papers',INFO('12th Past Papers')]]}
-];
+ const catData = [
+   {t:'Pairing Scheme', items: CL('Class Pairing')},
+   {t:'Test Series', items: CL('Test Series')},
+   {t:'Punjab Text Books', items: [['9th Text Book',INFO('9th Text Book')],['10th Text Book',INFO('10th Text Book')],['11th Text Book',INFO('11th Text Book')],['12th Text Book',INFO('12th Text Book')]]},
+   {t:'Sindh Text Books', items: [['9th Text Book',INFO('9th Text Book')],['10th Text Book',INFO('10th Text Book')]]},
+   {t:'Class Notes', items: CL('Class Notes')},
+   {t:'Results', items: CL('Class Result')},
+   {t:'Matric/SSC Past Papers', items: [['9th Past Papers',INFO('9th Past Papers')],['10th Past Papers',INFO('10th Past Papers')]]},
+   {t:'Inter/HSSC Past Papers', items: [['11th Past Papers',INFO('11th Past Papers')],['12th Past Papers',INFO('12th Past Papers')]]}
+ ];
 
-const catList = site.querySelector('#cat-list');
-catList.innerHTML = catData.map((c, i) => `
-  <button class="cat-btn" data-ci="${i}">${c.t} <span class="arrow">▼</span></button>
-  <div class="cat-sub" id="sub-${i}">
-    ${c.items.map(item => `<button data-cat-fn="${i}" data-item-idx="${c.items.indexOf(item)}">${item[0]}</button>`).join('')}
-  </div>
-`).join('');
+ const catList = site.querySelector('#cat-list');
+ catList.innerHTML = catData.map((c, i) => `
+   <button class="cat-btn" data-ci="${i}">${c.t} <span class="arrow">▼</span></button>
+   <div class="cat-sub" id="sub-${i}">
+     ${c.items.map((item, j) => `<button data-cat-fn="${i}" data-item-idx="${j}">${item[0]}</button>`).join('')}
+   </div>
+ `).join('');
 
-catList.querySelectorAll('.cat-btn').forEach(b => {
-  b.onclick = () => {
-    const i = b.dataset.ci;
-    const sub = catList.querySelector('#sub-'+i);
-    const isOpen = sub.classList.contains('on');
-    catList.querySelectorAll('.cat-sub').forEach(x => x.classList.remove('on'));
-    catList.querySelectorAll('.cat-btn').forEach(x => x.classList.remove('on'));
-    if (!isOpen) { sub.classList.add('on'); b.classList.add('on'); }
-  };
-});
+ catList.querySelectorAll('.cat-btn').forEach(b => {
+   b.onclick = () => {
+     const i = b.dataset.ci;
+     const sub = catList.querySelector('#sub-'+i);
+     const isOpen = sub.classList.contains('on');
+     catList.querySelectorAll('.cat-sub').forEach(x => x.classList.remove('on'));
+     catList.querySelectorAll('.cat-btn').forEach(x => x.classList.remove('on'));
+     if (!isOpen) { sub.classList.add('on'); b.classList.add('on'); }
+   };
+ });
 
-catList.querySelectorAll('.cat-sub button').forEach(b => {
-  b.onclick = () => {
-    const cIdx = b.dataset.catFn;
-    const iIdx = b.dataset.itemIdx;
-    catData[cIdx].items[iIdx][1](); // Call the function
-  };
-});
+ catList.querySelectorAll('.cat-sub button').forEach(b => {
+   b.onclick = () => {
+     const cIdx = b.dataset.catFn;
+     const iIdx = b.dataset.itemIdx;
+     catData[cIdx].items[iIdx][1]();
+   };
+ });
+
  $('#p-home').prepend(site);site.querySelectorAll('.lk').forEach(b=>b.onclick=()=>ALL[+b.dataset.c].l[+b.dataset.l][1]());
  let ti=0;const tt=$('#tt'),tick=()=>{tt.style.opacity=0;setTimeout(()=>{tt.textContent=TIPS[ti++%TIPS.length];tt.style.opacity=1},250)};tick();setInterval(tick,4500)}
 
