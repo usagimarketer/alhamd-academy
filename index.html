@@ -530,8 +530,8 @@ const CL=s=>['9th','10th','11th','12th'].map(x=>{const n=x+' '+s;return [n,INFO(
 const TB=['Punjab Text Books','Sindh Text Books','KPK Text Books','Federal Text Books','Balochistan Text Books','SNC Text Books'].map(n=>[n,INFO(n)]);
 const SITE=[
  {t:'Text Books',c:'#4caf50',k:'📚',l:TB},
- {t:'Punjab Notes',c:'#ff9800',k:'🎓',l:CL('Class Notes')},
- {t:'Test Series',c:'#2196f3',k:'❓',l:CL('Test Series')},
+ {t:'Notes',c:'#ff9800',k:'🎓',l:CL('Class Notes')},
+ {t:'Test Series',c:'#2196f3',k:'📝',l:CL('Test Series')},
  {t:'Pairing Schemes',c:'#9c27b0',k:'📋',l:CL('Class Pairing')},
  {t:'Past Papers (Punjab)',c:'#e91e63',k:'📑',l:CL('Past Papers')}];
 const PMF=[['Paper Settings',()=>go('paper')],['Questions',()=>go('q1')],['Layout',()=>go('layout')],['Preview',()=>go('prev')],['Print / PDF',()=>$('#pr').click()],['LaTeX Compiler',()=>go('latex')],['Backup file',()=>exp()],['Restore',()=>$('#imp').click()]];
