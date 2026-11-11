@@ -141,7 +141,7 @@ nav button.on .ic{transform:translateY(-3px) scale(1.12)}
 .cat-btn.on .arrow{transform:rotate(180deg)}
 .cat-sub{display:none;flex-direction:column;gap:4px;padding:4px 0 12px 12px;border-left:2px solid var(--pr);margin-left:14px;margin-bottom:8px}
 .cat-sub.on{display:flex}
-.cat-sub button{background:none;border:0;color:var(--mu);text-align:left;padding:8px 10px;font:inherit;font-size:14px;cursor:pointer;border-radius:6px;transition:0.2s}
+.cat-sub button{display:flex;justify-content:space-between;align-items:center;width:100%;background:none;border:0;color:var(--mu);text-align:left;padding:8px 10px;font:inherit;font-size:14px;cursor:pointer;border-radius:6px;transition:0.2s}
 .cat-sub button:hover{color:var(--pr);background:rgba(47,91,234,0.08)}
 .main-content{flex:1;min-width:0}
 @media(max-width:768px){.sidebar-wrap{flex-direction:column}.sidebar{width:100%;position:static}}
@@ -629,8 +629,8 @@ function buildSite(){const top=$('.top');top.className='top dk';
    {t:'Test Series', items: CL('Test Series')},
    {t:'Punjab Text Books', items: [['9th Text Book',INFO('9th Text Book')],['10th Text Book',INFO('10th Text Book')],['11th Text Book',INFO('11th Text Book')],['12th Text Book',INFO('12th Text Book')]]},
    {t:'Smart Syllabus Exam 2027', items: [
-    ['9th Class Smart Syllabus', () => window.open('https://drive.google.com/file/d/1Pyjevb4jM8RkniMj-XBjvL4_vrcTpJI6/view?usp=drive_link', '_blank')],
-    ['11th Class Smart Syllabus', () => window.open('https://drive.google.com/file/d/1mOB6A6Q0jyB3W3MXlP-56MmGxEurFBCz/view?usp=drive_link', '_blank')]
+    ['9th Class Smart Syllabus <span style="font-size:16px">⬇️</span>', () => window.open('https://drive.google.com/file/d/1Pyjevb4jM8RkniMj-XBjvL4_vrcTpJI6/view?usp=drive_link', '_blank')],
+    ['11th Class Smart Syllabus <span style="font-size:16px">⬇️</span>', () => window.open('https://drive.google.com/file/d/1mOB6A6Q0jyB3W3MXlP-56MmGxEurFBCz/view?usp=drive_link', '_blank')]
   ]},
    {t:'Class Notes', items: CL('Class Notes')},
    {t:'Results', items: CL('Class Result')},
