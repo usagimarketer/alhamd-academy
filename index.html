@@ -587,6 +587,10 @@ function openNotes(p){
  box.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{const i=+b.dataset.b;i===0?go('home'):openNotes(p.slice(0,i))});
  box.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{
    const sub = currentSubs[+b.dataset.k];
+   if(p.length===1 && p[0]==='9th Class Pairing' && sub==='Mathematics'){
+     window.open('https://tinyurl.com/9-Math-Pairing-Scheme-2027','_blank','noopener');
+     return;
+   }
    if(!n[sub]) n[sub] = {};
    openNotes([...p, sub]);
  });
