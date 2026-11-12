@@ -612,12 +612,12 @@ function openNotes(p){
       'Science': {bg:'#8b5cf6', icon:'🔬'},
       'Computer': {bg:'#3b82f6', icon:'💻'},
       'Pak Studies': {bg:'#10b981', icon:'🇵🇰'},
-      'Physics': {bg:'#6366f1', icon:'⚛️'},
+      'Physics': {bg:'#7c3aed', icon:'⚛️'},
       'Chemistry': {bg:'#ec4899', icon:'🧪'},
       'Biology': {bg:'#22c55e', icon:'🧬'},
       'Tarjuma-tul-Quran': {bg:'#047857', icon:'📖'}
     };
-    const defSubs = p[0]==='9th Class Pairing'
+    const defSubs = ['9th Class Pairing','9th Text Book'].includes(p[0])
       ? ['Urdu','English','Mathematics','Islamiat','Physics','Chemistry','Biology','Computer','Tarjuma-tul-Quran']
       : ['Urdu','English','Mathematics','Islamiat','Science','Computer','Pak Studies'];
     const keys = Object.keys(n).filter(k=>k!=='');
