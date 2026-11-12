@@ -153,6 +153,21 @@ nav button.on .ic{transform:translateY(-3px) scale(1.12)}
 .social-btn.instagram:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-color:transparent}
 .social-btn.facebook:hover{background:#1877F2;border-color:#1877F2}
 .social-btn.contact:hover{background:#fff;color:#4a12a8;border-color:#fff}
+.cyc{--indigo:#4f46e5;--violet:#7c3aed;--ink:#1e1b4b;--muted:#64748b;font-family:Inter,Poppins,system-ui,-apple-system,"Segoe UI",sans-serif;padding:40px 20px;background:radial-gradient(600px 300px at 10% 0%,rgba(79,70,229,.12),transparent 70%),radial-gradient(600px 300px at 90% 100%,rgba(124,58,237,.12),transparent 70%),#f6f7fb;border-radius:24px}
+.cyc__head{text-align:center;margin-bottom:28px}
+.cyc__head h2{margin:0 0 6px;font-size:clamp(24px,4vw,34px);font-weight:700;color:var(--ink)}
+.cyc__head p{margin:0;color:var(--muted);font-size:15px}
+.cyc__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:960px;margin:0 auto}
+@media(min-width:768px){.cyc__grid{grid-template-columns:repeat(4,1fr);gap:24px}}
+.cyc__card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:28px 12px 22px;font:inherit;cursor:pointer;background:rgba(255,255,255,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.9);border-radius:20px;box-shadow:0 6px 20px rgba(30,27,75,.07);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.cyc__card:hover,.cyc__card:focus-visible{transform:translateY(-5px);border-color:rgba(79,70,229,.55);box-shadow:0 16px 34px rgba(79,70,229,.22);outline:none}
+.cyc__card:active{transform:translateY(-2px)}
+.cyc__icon{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:rgba(79,70,229,.1);transition:background .25s ease}
+.cyc__icon svg{width:22px;height:22px;fill:none;stroke:var(--indigo);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.cyc__card:hover .cyc__icon{background:rgba(79,70,229,.18)}
+.cyc__num{font-size:clamp(48px,9vw,68px);font-weight:800;line-height:1;background:linear-gradient(135deg,var(--indigo),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--indigo)}
+.cyc__label{font-size:15px;font-weight:600;color:var(--ink)}
+@media(prefers-reduced-motion:reduce){.cyc__card,.cyc__icon{transition:none}}
 </style>
 </head>
 <body>
@@ -597,9 +612,23 @@ function openNotes(p){
  $('#nback').onclick=()=>p.length>1?openNotes(p.slice(0,-1)):go('home');
  go('notes');window.scrollTo(0,0);
 }
+function openTextBooks(){
+ const book='<svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5zM19 19v2H6M8 7h7M8 11h5"/></svg>',cap='<svg viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5zM6 12v5c3 3 9 3 12 0v-5"/></svg>';
+ const cls=[[9,book],[10,book],[11,cap],[12,cap]];
+ $('#nb').innerHTML=`<div class="card"><div class="nbc"><button class="bcb" data-h="1">Home</button> › Punjab Text Books</div>
+ <section class="cyc" aria-labelledby="cyc-title"><div class="cyc__head"><h2 id="cyc-title">Choose Your Class</h2><p>Punjab Text Books, select your class to open the PDFs</p></div>
+ <div class="cyc__grid">${cls.map(([n,ic])=>`<button class="cyc__card" data-cls="${n}"><span class="cyc__icon" aria-hidden="true">${ic}</span><span class="cyc__num">${n}</span><span class="cyc__label">Class ${n}</span></button>`).join('')}</div></section>
+ <button class="btn" id="nback" style="margin-top:12px">⬅️ Wapas</button></div>`;
+ const box=$('#nb');
+ box.querySelector('[data-h]').onclick=()=>go('home');
+ box.querySelectorAll('[data-cls]').forEach(b=>b.onclick=INFO(b.dataset.cls+'th Text Book'));
+ $('#nback').onclick=()=>go('home');
+ go('notes');window.scrollTo(0,0);
+}
 const INFO=t=>()=>{if(!NOTES[t])NOTES[t]={};openNotes([t])};
 const CL=s=>['9th','10th','11th','12th'].map(x=>{const n=x+' '+s;return [n,INFO(n)]});
 const TB=['Punjab Text Books','Sindh Text Books','KPK Text Books','Federal Text Books','Balochistan Text Books','SNC Text Books'].map(n=>[n,INFO(n)]);
+TB[0][1]=openTextBooks;
 const SITE=[
  {t:'Text Books',c:'#4caf50',k:'📚',l:TB},
  {t:'Notes',c:'#ff9800',k:'🎓',l:CL('Class Notes')},
