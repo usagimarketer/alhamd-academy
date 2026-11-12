@@ -554,9 +554,15 @@ function openNotes(p){
       'Islamiat': {bg:'#fef3c7', icon:'🕌', tx:'#000'},
       'Science': {bg:'#8b5cf6', icon:'🔬'},
       'Computer': {bg:'#3b82f6', icon:'💻'},
-      'Pak Studies': {bg:'#10b981', icon:'🇵🇰'}
+      'Pak Studies': {bg:'#10b981', icon:'🇵🇰'},
+      'Physics': {bg:'#6366f1', icon:'⚛️'},
+      'Chemistry': {bg:'#ec4899', icon:'🧪'},
+      'Biology': {bg:'#22c55e', icon:'🧬'},
+      'Tarjuma-tul-Quran': {bg:'#047857', icon:'📖'}
     };
-    const defSubs = ['Urdu','English','Mathematics','Islamiat','Science','Computer','Pak Studies'];
+    const defSubs = p[0]==='9th Class Pairing'
+      ? ['Urdu','English','Mathematics','Islamiat','Physics','Chemistry','Biology','Computer','Tarjuma-tul-Quran']
+      : ['Urdu','English','Mathematics','Islamiat','Science','Computer','Pak Studies'];
     const keys = Object.keys(n).filter(k=>k!=='');
     currentSubs = [...new Set([...keys, ...defSubs])];
 
