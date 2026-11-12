@@ -168,6 +168,38 @@ nav button.on .ic{transform:translateY(-3px) scale(1.12)}
 .cyc__num{font-size:clamp(48px,9vw,68px);font-weight:800;line-height:1;background:linear-gradient(135deg,var(--indigo),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--indigo)}
 .cyc__label{font-size:15px;font-weight:600;color:var(--ink)}
 @media(prefers-reduced-motion:reduce){.cyc__card,.cyc__icon{transition:none}}
+.bk{display:grid;gap:20px;grid-template-columns:1fr;margin-top:6px}
+@media(min-width:860px){.bk{grid-template-columns:300px 1fr;gap:28px}}
+#nb h1{font:700 clamp(26px,4.5vw,38px)/1.2 Poppins,Inter,system-ui,sans-serif;margin:6px 0 12px}
+.bk-badges{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.bk-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:30px;font-size:13px;font-weight:700;background:var(--card);border:1px solid var(--ln);color:var(--tx)}
+.bk-badge svg{width:16px;height:16px}.bk-badge.pdf{color:#dc2626}.bk-badge.pub{color:#16a34a}
+.bk svg,.bk-badge svg{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.bk-cover{background:var(--card);border:1px solid var(--ln);border-radius:20px;padding:14px;box-shadow:0 8px 24px rgba(0,0,0,.07);align-self:start;text-align:center}
+.bk-img{aspect-ratio:3/4;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(30,27,75,.25);background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:18px}
+.bk-img img{width:100%;height:100%;object-fit:cover}
+.bk-img b{font:800 64px/1 Poppins,system-ui,sans-serif}.bk-img span{font-weight:700;font-size:17px;opacity:.95}.bk-img small{opacity:.8}
+.bk-stars{display:flex;justify-content:center;gap:3px;margin-top:12px;color:#f59e0b}
+.bk-stars svg{width:20px;height:20px;fill:currentColor;stroke:none}.bk-stars svg.off{color:var(--ln)}
+.bk-box{background:var(--card);border:1px solid var(--ln);border-radius:18px;padding:18px;margin-bottom:16px}
+.bk-box h3{margin:0 0 10px;font-size:17px}
+.bk-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.bk-meta div{display:flex;gap:10px;align-items:center}
+.bk-meta svg{width:22px;height:22px;color:var(--pr);flex:none}
+.bk-meta small{display:block;color:var(--mu);font-size:12px}.bk-meta b{font-size:15px}
+.bk-acts{display:flex;gap:10px;flex-wrap:wrap}
+.bk-act{display:inline-flex;flex-direction:column;align-items:center;gap:4px;min-width:64px;padding:10px 12px;border-radius:14px;border:1px solid var(--ln);background:var(--card);color:var(--tx);font:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:transform .2s,background .2s,color .2s,border-color .2s}
+.bk-act svg{width:20px;height:20px}
+.bk-act:hover{transform:translateY(-3px);background:var(--pr);color:#fff;border-color:var(--pr)}
+.bk-act.on{color:#e11d48;border-color:#e11d48}.bk-act.on svg{fill:currentColor}
+.bk-dl{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;border-radius:16px;border:0;font:700 18px Poppins,Inter,system-ui,sans-serif;text-decoration:none;color:#fff;background:linear-gradient(135deg,#4f46e5,#7c3aed);box-shadow:0 10px 24px rgba(79,70,229,.35);cursor:pointer;transition:transform .2s,box-shadow .2s}
+.bk-dl svg{width:22px;height:22px}
+a.bk-dl:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(79,70,229,.45)}
+.bk-dl.off{background:var(--ln);color:var(--mu);box-shadow:none;cursor:not-allowed}
+.bk-tags{display:flex;gap:8px;flex-wrap:wrap}
+.bk-tag{padding:7px 14px;border-radius:30px;border:1px solid var(--ln);background:var(--bg);color:var(--tx);font:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.bk-tag:hover{background:var(--pr);color:#fff;border-color:var(--pr)}
+.bk-copy{font-size:13px;color:var(--mu);line-height:1.6;grid-column:1/-1}
 </style>
 </head>
 <body>
@@ -602,6 +634,7 @@ function openNotes(p){
  box.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{const i=+b.dataset.b;i===0?go('home'):openNotes(p.slice(0,i))});
  box.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{
    const sub = currentSubs[+b.dataset.k];
+   if(p.length===1 && BOOKS[p[0]] && sub==='Mathematics'){openBook(BOOKS[p[0]]);return}
    if(p.length===1 && p[0]==='9th Class Pairing' && sub==='Mathematics'){
      window.open('https://tinyurl.com/9-Math-Pairing-Scheme-2027','_blank','noopener');
      return;
@@ -610,6 +643,47 @@ function openNotes(p){
    openNotes([...p, sub]);
  });
  $('#nback').onclick=()=>p.length>1?openNotes(p.slice(0,-1)):go('home');
+ go('notes');window.scrollTo(0,0);
+}
+const BOOKS={
+ '9th Text Book':{cls:'9th',title:'9th Class Mathematics',url:'',size:'',author:'',views:'',downloads:'',updated:'',year:'',session:'',rating:0,cover:'',overview:'Punjab Text Books ki 9th Class Mathematics ki kitab. Download ka link milte hi yahan se kitab download ki ja sakegi.'},
+ '10th Text Book':{cls:'10th',title:'10th Class Mathematics',url:'',size:'',author:'',views:'',downloads:'',updated:'',year:'',session:'',rating:0,cover:'',overview:'Punjab Text Books ki 10th Class Mathematics ki kitab. Download ka link milte hi yahan se kitab download ki ja sakegi.'},
+ '11th Text Book':{cls:'11th',title:'11th Class Mathematics',url:'',size:'',author:'',views:'',downloads:'',updated:'',year:'',session:'',rating:0,cover:'',overview:'Punjab Text Books ki 11th Class Mathematics ki kitab. Download ka link milte hi yahan se kitab download ki ja sakegi.'},
+ '12th Text Book':{cls:'12th',title:'12th Class Mathematics',url:'',size:'',author:'',views:'',downloads:'',updated:'',year:'',session:'',rating:0,cover:'',overview:'Punjab Text Books ki 12th Class Mathematics ki kitab. Download ka link milte hi yahan se kitab download ki ja sakegi.'}
+};
+function openBook(b){
+ const I=d=>`<svg viewBox="0 0 24 24">${d}</svg>`,
+  ic={file:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6"/>',globe:'<circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/>',
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',eye:'<path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  dl:'<path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/>',cal:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+  clock:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',cap:'<path d="M22 10 12 5 2 10l10 5 10-5zM6 12v5c3 3 9 3 12 0v-5"/>',
+  share:'<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/>',
+  heart:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>',
+  flag:'<path d="M4 22V4M4 4h14l-2 5 2 5H4"/>'},
+  star=on=>`<svg viewBox="0 0 24 24" class="${on?'':'off'}"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21.1 7 14.2 2 9.3l6.9-1z"/></svg>`;
+ const meta=[['user','Author',b.author],['eye','Views',b.views],['dl','Downloads',b.downloads],['clock','Last updated',b.updated],['cal','Publication year',b.year],['cap','Academic session',b.session]].filter(m=>m[2]);
+ const tags=[b.cls+' Class','Punjab Text Books','Mathematics'];
+ let fav=false;try{fav=localStorage.getItem('fav_'+b.title)==='1'}catch(e){}
+ $('#nb').innerHTML=`<div class="card"><div class="nbc"><button class="bcb" data-n="h">Home</button> › <button class="bcb" data-n="t">Punjab Text Books</button> › <button class="bcb" data-n="c">${esc(b.cls)} Class</button> › ${esc(b.title)}</div>
+ <h1 style="color:var(--tx)">${esc(b.title)}</h1>
+ <div class="bk-badges"><span class="bk-badge pdf">${I(ic.file)} PDF${b.size?' ('+esc(b.size)+')':''}</span><span class="bk-badge pub">${I(ic.globe)} PUBLIC</span></div>
+ <div class="bk"><aside><div class="bk-cover"><div class="bk-img">${b.cover?`<img src="${esc(b.cover)}" alt="${esc(b.title)}">`:`<b>${parseInt(b.cls)}</b><span>Mathematics</span><small>Punjab Text Books</small>`}</div>
+  ${b.rating?`<div class="bk-stars" aria-label="Rating ${b.rating} of 5">${[1,2,3,4,5].map(n=>star(n<=b.rating)).join('')}</div>`:''}</div></aside>
+ <div>
+  ${meta.length?`<div class="bk-box"><div class="bk-meta">${meta.map(m=>`<div>${I(ic[m[0]])}<span><small>${m[1]}</small><b>${esc(m[2])}</b></span></div>`).join('')}</div></div>`:''}
+  <div class="bk-box"><div class="bk-acts"><button class="bk-act" id="bkS">${I(ic.share)}Share</button><button class="bk-act${fav?' on':''}" id="bkF">${I(ic.heart)}Favorite</button><button class="bk-act" id="bkR">${I(ic.flag)}Report</button></div></div>
+  ${b.url?`<a class="bk-dl" href="${esc(b.url)}" target="_blank" rel="noopener">${I(ic.dl)} Download PDF${b.size?' ('+esc(b.size)+')':''}</a>`:`<button class="bk-dl off" disabled>${I(ic.dl)} Download link jald add hoga</button>`}
+  ${b.overview?`<div class="bk-box" style="margin-top:16px"><h3>Overview</h3><p style="margin:0;color:var(--mu)">${esc(b.overview)}</p></div>`:''}
+  <div class="bk-box"><h3>Tags</h3><div class="bk-tags">${tags.map(t=>`<button class="bk-tag">${esc(t)}</button>`).join('')}</div></div>
+ </div>
+ <div class="bk-box bk-copy" style="margin:0"><b style="color:var(--tx)">Copyright Policy</b><br>Yeh kitab sirf taleemi maqasid ke liye pesh ki gayi hai. Tamam huqooq asal publisher / Punjab Textbook Board ke paas mehfooz hain. Agar aap is kitab ke malik hain aur isay hatana chahte hain to hum se rabta karein, kitab foran hata di jayegi.</div>
+ </div></div>`;
+ const box=$('#nb');
+ box.querySelectorAll('[data-n]').forEach(x=>x.onclick=()=>{const k=x.dataset.n;k==='h'?go('home'):k==='t'?openTextBooks():INFO(b.cls+' Text Book')()});
+ $('#bkS').onclick=async()=>{const d={title:b.title,text:b.title+' - AlHamd Online Academy',url:location.href.split('#')[0]};try{if(navigator.share){await navigator.share(d)}else{await navigator.clipboard.writeText(d.url);toast('Link copy ho gaya')}}catch(e){}};
+ $('#bkF').onclick=e=>{fav=!fav;e.currentTarget.classList.toggle('on',fav);try{localStorage.setItem('fav_'+b.title,fav?'1':'0')}catch(x){}};
+ $('#bkR').onclick=()=>{location.href='mailto:alhamdonlineacademy30@gmail.com?subject='+encodeURIComponent('Report: '+b.title)};
+ box.querySelectorAll('.bk-tag').forEach(t=>t.onclick=()=>{const si=$('#sri');if(si){si.hidden=false;si.value=t.textContent;si.oninput()}});
  go('notes');window.scrollTo(0,0);
 }
 function openTextBooks(){
