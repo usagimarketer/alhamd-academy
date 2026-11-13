@@ -227,47 +227,38 @@ a.bk-dl:hover,button.bk-dl:hover{background:#4338ca;transform:translateY(-3px);b
 :root[data-theme="dark"]{--gl-bg:rgba(255,255,255,.12);--gl-bd:rgba(255,255,255,.25);--gl-sh:0 8px 32px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.35);--gl-lk:rgba(255,255,255,.08);--gl-lkbd:rgba(255,255,255,.15);--gl-lkh:rgba(255,255,255,.16);--gl-glow:rgba(255,255,255,.2)}
 /* glowing orbs behind the glass (backdrop-filter needs colour to blur) */
 #site{background:radial-gradient(circle 380px at 12% 28%,rgba(79,70,229,.22),transparent 70%),radial-gradient(circle 420px at 88% 22%,rgba(168,85,247,.20),transparent 70%),radial-gradient(circle 380px at 72% 70%,rgba(236,72,153,.14),transparent 70%),radial-gradient(circle 360px at 20% 85%,rgba(56,189,248,.16),transparent 70%)}
-/* ===== Neon / gradient-glow cards (cyberpunk) ===== */
-.hg{gap:20px}
-.hc2{position:relative;z-index:1;background:transparent;color:#f0f0f5;border:0;border-radius:20px;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;transition:all .3s ease}
-.hc2::before{content:"";position:absolute;inset:-3px;border-radius:23px;background:linear-gradient(45deg,#ff007f,#00f0ff,#7000ff);z-index:-2;filter:blur(18px);opacity:.6;transition:all .3s ease;pointer-events:none}
-.hc2::after{content:"";position:absolute;inset:0;border-radius:20px;background:#14141c;z-index:-1;pointer-events:none}
-.hc2:hover{transform:scale(1.02);box-shadow:none}
-.hc2:hover::before{opacity:1;filter:blur(25px)}
-.hc2 h3{color:#f0f0f5}
-.hc2 .lk{background:transparent;color:#e8e8f2;border:1px solid #2c2c3c;border-left:1px solid #2c2c3c;border-radius:10px;transition:all .3s ease}
-.hc2 .lk:hover{background:transparent;color:#00f0ff;border-color:#00f0ff;text-shadow:0 0 8px rgba(0,240,255,.7);box-shadow:0 0 12px rgba(0,240,255,.35),inset 0 0 8px rgba(0,240,255,.12)}
 /* glassy Trending pill */
 .trend{background:var(--gl-bg);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);border:1px solid var(--gl-bd);box-shadow:var(--gl-sh)}
-/* ===== GLOBAL NEON / GRADIENT GLOW THEME (CSS only) ===== */
-:root:root:root{--bg:#07070a;--card:#12121c;--tx:#e2e8f0;--mu:#94a3b8;--pr:#00f0ff;--ln:#2a2a3a;color-scheme:dark}
-html{background:#07070a;min-height:100%}body{min-height:100vh}
-body{background:radial-gradient(circle at 15% 50%,rgba(112,0,255,.15),transparent 30%),radial-gradient(circle at 85% 30%,rgba(0,240,255,.1),transparent 30%),var(--bg);background-attachment:fixed;color:var(--tx)}
-.trend{background:var(--card);border:1px solid var(--ln);box-shadow:0 0 14px rgba(0,240,255,.18);-webkit-backdrop-filter:none;backdrop-filter:none;color:var(--tx)}
-.trend,.trend *{color:var(--tx)!important;opacity:1}.trend .tb{color:#fff!important}
-/* reusable glow containers */
-.card,.bt,.sm button,.sub-card,.cyc__card{position:relative;z-index:1;border:1px solid var(--ln);border-radius:20px;transition:all .3s ease;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;color:var(--tx)}
-.card,.bt,.sm button,.cyc__card{background:transparent}
-.card::after,.bt::after,.sm button::after,.cyc__card::after{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--card);z-index:-1;pointer-events:none}
-.card::before,.bt::before,.sm button::before,.sub-card::before,.cyc__card::before{content:"";position:absolute;inset:-2px;z-index:-2;border-radius:22px;background:linear-gradient(45deg,#ff007f,#00f0ff,#7000ff);filter:blur(15px);opacity:.3;transition:opacity .3s ease,filter .3s ease;pointer-events:none}
-.card:hover::before,.bt:hover::before,.sm button:hover::before,.sub-card:hover::before,.cyc__card:hover::before{opacity:.8;filter:blur(20px)}
-.bt:hover,.sm button:hover,.sub-card:hover,.cyc__card:hover{transform:translateY(-3px)}
-.card:hover{transform:none}
-.sub-card{border:1px solid var(--ln)}
-/* sidebar scrolls + is sticky, so it gets an outer glow instead of a pseudo-element */
-.sidebar{background:var(--card);border:1px solid var(--ln);border-radius:20px;box-shadow:0 0 18px rgba(0,240,255,.18),0 0 28px rgba(112,0,255,.22);color:var(--tx);transition:all .3s ease}
-.sidebar:hover{box-shadow:0 0 22px rgba(0,240,255,.4),0 0 34px rgba(255,0,127,.3)}
-/* top bar + navigation */
-.top,.top.dk{background:var(--card);border-bottom:1px solid var(--pr);color:var(--tx)}
-.top.dk button{color:var(--tx)}
-nav{background:var(--card);border-top:1px solid var(--pr);border-bottom:0}
-nav button.on,.top.dk button.on,.cat-btn.on,.seg button.on,.chip.on{color:var(--pr)}
-.cat-btn.on,.seg button.on,.chip.on{background:rgba(0,240,255,.12);border-color:var(--pr)}
-/* buttons */
-.btn,.bk-dl{background:linear-gradient(45deg,#7000ff,#00f0ff);color:#000;font-weight:bold;border:none;box-shadow:0 6px 20px rgba(0,240,255,.25);transition:filter .3s ease,transform .2s}
-.btn:hover,.bk-dl:hover{filter:brightness(1.25)}
-/* Paper Maker preview must stay white / black for printing */
-.paper{background:#fff!important;color:#000!important}
+/* ===== GLOBAL LIGHT FROSTED GLASS THEME ===== */
+:root:root:root{--bg:#f0f4f8;--card:rgba(255,255,255,0.6);--tx:#0f172a;--mu:#334155;--pr:#3b82f6;--ln:rgba(255,255,255,0.9);color-scheme:light}
+html{background:#f0f4f8;min-height:100%}
+body{min-height:100vh;background-color:var(--bg);background-image:radial-gradient(circle at 10% 20%,rgba(59,130,246,0.15),transparent 40%),radial-gradient(circle at 90% 80%,rgba(168,85,247,0.15),transparent 40%);background-attachment:fixed;color:var(--tx)}
+.card,.hc2,.bk-box,.sidebar,.top,.top.dk,nav{background:var(--card);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--ln);box-shadow:0 8px 24px rgba(0,0,0,0.04);color:var(--tx)}
+.card,.hc2{position:relative}
+.hc2{border-radius:20px}
+.top,.top.dk{border-width:0 0 1px;border-bottom:1px solid var(--ln)}
+nav{border-width:1px 0 0}
+.top.dk button,.top.dk #st{color:var(--tx)}
+.top.dk button:not(.on) svg{stroke:var(--tx)}
+.top.dk .hm.on{color:#fff}.top.dk .hm.on svg{stroke:#fff}
+.bk-box.bk-ov{background:#eff6ff;border-color:#bfdbfe}
+/* inner links */
+.lk,.bk-tag,.bk-act{background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.8);color:var(--mu);border-radius:10px;transition:all .3s ease}
+.lk{border-left:1px solid rgba(255,255,255,0.8)}
+.lk:hover,.bk-tag:hover,.bk-act:hover{background:#ffffff;color:var(--pr);border-color:rgba(255,255,255,0.8);box-shadow:0 4px 10px rgba(0,0,0,0.05)}
+.hc2 .lk{color:var(--mu)}.hc2 h3{color:var(--tx)}
+/* bento grid on home */
+.hg{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.hg>.hc2:first-child{grid-column:span 2;grid-row:span 2;align-self:stretch}
+@media(max-width:768px){.hg{grid-template-columns:1fr}.hg>.hc2:first-child{grid-column:auto;grid-row:auto}}
+/* smart glass break effect */
+.hc2::after,.card::after{content:"";position:absolute;inset:0;border-radius:inherit;background-image:url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M50 50L25 15M50 50L85 25M50 50L90 75M50 50L60 95M50 50L15 80M50 50L10 40M50 50L40 80" stroke="rgba(15,23,42,0.4)" stroke-width="1.2" stroke-linecap="round"/><circle cx="50" cy="50" r="4" stroke="rgba(15,23,42,0.6)" stroke-width="1.5" fill="none"/></svg>');background-size:120px 120px;background-repeat:no-repeat;background-position:calc(var(--x,50%) - 60px) calc(var(--y,50%) - 60px);opacity:0;z-index:10;pointer-events:none;mix-blend-mode:multiply}
+.is-breaking::after{animation:smartCrack .4s ease-out forwards}
+@keyframes smartCrack{0%{opacity:1;transform:scale(.95)}50%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.05)}}
+nav button .ic svg,nav button svg{stroke:var(--mu)}nav button.on .ic svg,nav button.on svg{stroke:var(--pr)}
+.top.dk button:not(.on) .ic svg{stroke:var(--tx)}
+/* Paper Maker preview stays white / black */
+.paper{background:#fff!important;color:#000!important;-webkit-backdrop-filter:none;backdrop-filter:none}
 .paper *{color:#000!important}
 </style>
 </head>
@@ -964,6 +955,10 @@ buildSite();
 S=upg(S);fill();renderQ();
 (async()=>{try{if(!window.claude)return;const db=await claude.use('db'),u=await claude.use('user');if(!db||!u)return;const id=await u.id();ref=db.collection('data/users/'+id).doc('paper');
  const s=await ref.get();if(s.exists&&!dirty){S=upg(norm(JSON.parse(s.data().json)));fill();renderQ()}status('☁️ Account se jura')}catch(e){}})();
+
+/* smart glass break: crack appears where a card/tile is clicked */
+document.addEventListener('click',function(e){const t=e.target.closest&&e.target.closest('.hc2,.card');if(!t)return;const r=t.getBoundingClientRect();t.style.setProperty('--x',(e.clientX-r.left)+'px');t.style.setProperty('--y',(e.clientY-r.top)+'px');t.classList.remove('is-breaking');void t.offsetWidth;t.classList.add('is-breaking');},true);
+document.addEventListener('animationend',function(e){if(e.animationName==='smartCrack')e.target.classList.remove('is-breaking')},true);
 </script>
 </body>
 </html>
