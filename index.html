@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://usagimarketer.github.io/alhamd-academy">
 <meta property="og:site_name" content="AlHamd Online Academy">
 <meta name="twitter:card" content="summary_large_image">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&family=Carlito:wght@400;700&family=Caladea:wght@400;700&family=EB+Garamond:wght@400;700&family=Old+Standard+TT:wght@400;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&family=Poppins:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f3f5fb;--card:#fff;--tx:#1b2433;--mu:#64708a;--pr:#2f5bea;--ln:#e0e6f2;--bad:#e03a3a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1420;--card:#18203a;--tx:#e9edf8;--mu:#97a3c0;--pr:#7b97ff;--ln:#2b3555}}
@@ -251,10 +251,6 @@ nav{border-width:1px 0 0}
 .hg{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .hg>.hc2:first-child{grid-column:span 2;grid-row:span 2;align-self:stretch}
 @media(max-width:768px){.hg{grid-template-columns:1fr}.hg>.hc2:first-child{grid-column:auto;grid-row:auto}}
-/* smart glass break effect */
-.hc2::after,.card::after{content:"";position:absolute;inset:0;border-radius:inherit;background-image:url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M50 50L25 15M50 50L85 25M50 50L90 75M50 50L60 95M50 50L15 80M50 50L10 40M50 50L40 80" stroke="rgba(37, 99, 235, 0.3)" stroke-width="1.2" stroke-linecap="round"/><circle cx="50" cy="50" r="4" stroke="rgba(37, 99, 235, 0.5)" stroke-width="1.5" fill="none"/></svg>');background-size:120px 120px;background-repeat:no-repeat;background-position:calc(var(--x,50%) - 60px) calc(var(--y,50%) - 60px);opacity:0;z-index:10;pointer-events:none;mix-blend-mode:multiply}
-.is-breaking::after{animation:smartCrack .4s ease-out forwards}
-@keyframes smartCrack{0%{opacity:1;transform:scale(.95)}50%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.05)}}
 nav button .ic svg,nav button svg{stroke:var(--mu)}nav button.on .ic svg,nav button.on svg{stroke:var(--pr)}
 .top.dk button:not(.on) .ic svg{stroke:var(--tx)}
 /* ===== Royal Sapphire accent ===== */
@@ -788,7 +784,7 @@ function openBook(b){
  <h1 style="color:var(--tx)">${esc(b.title)}</h1>
  <div class="bk-badges"><span class="bk-badge pdf">${I(ic.file)} PDF${b.size?' ('+esc(b.size)+')':''}</span><span class="bk-badge pub">${I(ic.globe)} PUBLIC</span></div>
  ${meta.length?`<div class="bk-box bk-top"><div class="bk-meta">${meta.map(m=>`<div data-mk="${m[1]}">${I(ic[m[0]])}<span><small>${m[1]}</small><b>${esc(m[2])}</b></span></div>`).join('')}</div></div>`:''}
- <div class="bk"><aside><div class="bk-cover">${b.view?`<a class="bk-imglink" id="bkV" href="${esc(b.view)}" target="_blank" rel="noopener" title="Read online" aria-label="Read ${esc(b.title)} online">`:''}<div class="bk-img${b.cover?' has-img':''}">${b.cover?`<img src="${esc(b.cover)}" alt="${esc(b.title)}">`:`<b>${parseInt(b.cls)}</b><span>${esc(subj)}</span><small>Punjab Text Books</small>`}</div>${b.view?'</a>':''}
+ <div class="bk"><aside><div class="bk-cover">${b.view?`<a class="bk-imglink" id="bkV" href="${esc(b.view)}" target="_blank" rel="noopener" title="Read online" aria-label="Read ${esc(b.title)} online">`:''}<div class="bk-img${b.cover?' has-img':''}">${b.cover?`<img src="${esc(b.cover)}" alt="${esc(b.title)}" loading="lazy" decoding="async">`:`<b>${parseInt(b.cls)}</b><span>${esc(subj)}</span><small>Punjab Text Books</small>`}</div>${b.view?'</a>':''}
   ${b.rating?`<div class="bk-stars" aria-label="Rating ${b.rating} of 5">${[1,2,3,4,5].map(n=>star(n<=b.rating)).join('')}</div>`:''}</div></aside>
  <div>
   <div class="bk-box"><div class="bk-acts"><button class="bk-act" id="bkS">${I(ic.share)}Share</button><button class="bk-act${fav?' on':''}" id="bkF">${I(ic.heart)}Favorite</button>${b.url?`<button class="bk-act" id="bkE">${I('<path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>')}Embed</button>`:''}<button class="bk-act" id="bkR">${I(ic.flag)}Report</button></div></div>
@@ -969,9 +965,6 @@ S=upg(S);fill();renderQ();
 (async()=>{try{if(!window.claude)return;const db=await claude.use('db'),u=await claude.use('user');if(!db||!u)return;const id=await u.id();ref=db.collection('data/users/'+id).doc('paper');
  const s=await ref.get();if(s.exists&&!dirty){S=upg(norm(JSON.parse(s.data().json)));fill();renderQ()}status('☁️ Account se jura')}catch(e){}})();
 
-/* smart glass break: crack appears where a card/tile is clicked */
-document.addEventListener('click',function(e){const t=e.target.closest&&e.target.closest('.hc2,.card');if(!t)return;const r=t.getBoundingClientRect();t.style.setProperty('--x',(e.clientX-r.left)+'px');t.style.setProperty('--y',(e.clientY-r.top)+'px');t.classList.remove('is-breaking');void t.offsetWidth;t.classList.add('is-breaking');},true);
-document.addEventListener('animationend',function(e){if(e.animationName==='smartCrack')e.target.classList.remove('is-breaking')},true);
 </script>
 </body>
 </html>

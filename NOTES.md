@@ -135,3 +135,4 @@ Repo ka suggested layout:
 - 2026-11-13: Royal Sapphire colour scheme: --pr #2563eb, --accent-light #eff6ff, blue hero gradient, blue body glow, blue glass-crack SVG, light-blue icon circles (.ci), blue hover shadows. Dark-purple nav/dropdown hover now blue. .paper untouched.
 - 2026-11-13: 10th Text Book > Chemistry: Drive url + view links added (cover still empty).
 - 2026-11-13: 10th Chemistry cover set to ./images/10th-chemistry-cover.webp.
+- 2026-11-13: Performance: glass-break effect (CSS+JS) removed; Google Fonts trimmed to Noto Nastaliq Urdu, Poppins 600/700, Inter 400-700; book cover img lazy-loaded. NOTE: Paper Maker font choices Amiri/Naskh/Calibri(Carlito)/Cambria(Caladea)/Garamond/Old Standard TT now depend on fonts installed on the device.
