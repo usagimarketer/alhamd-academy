@@ -128,3 +128,4 @@ Repo ka suggested layout:
 - Har bade change ke baad `index.html` ka backup le lein
 
 - 2026-11-13: Home category cards redesigned in Neon / Gradient Glow (cyberpunk) style (dark #14141c card, blurred pink-cyan-purple glow, cyan hover on links). Replaces the earlier glassmorphism .hc2 styling. Data, text, links, icons and JS unchanged.
+- 2026-11-13: GLOBAL Neon/Gradient Glow theme (CSS only, appended at end of <style>): dark :root vars, glowing body bg, glow on .card/.bt/.sm button/.sub-card/.cyc__card, glow box-shadow on .sidebar, cyan top/nav borders, gradient .btn/.bk-dl. .paper stays white/black (print safe). Dark theme is forced in all modes.
