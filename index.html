@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AlHamd Online Academy</title>
+<meta name="description" content="AlHamd Online Academy - Punjab Text Books, Notes, Test Series, Past Papers, and Paper Maker by Sir USama.">
+<meta property="og:title" content="AlHamd Online Academy">
+<meta property="og:description" content="Download Punjab Text Books, Notes, Test Series, Past Papers, and create custom papers with our Paper Maker.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="./images/9th-math-cover.jpg"> <!-- Use a proper logo/cover image URL here -->
+<meta name="twitter:card" content="summary_large_image">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&family=Carlito:wght@400;700&family=Caladea:wght@400;700&family=EB+Garamond:wght@400;700&family=Old+Standard+TT:wght@400;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f3f5fb;--card:#fff;--tx:#1b2433;--mu:#64708a;--pr:#2f5bea;--ln:#e0e6f2;--bad:#e03a3a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -703,7 +709,7 @@ function openBook(b){
   ${b.rating?`<div class="bk-stars" aria-label="Rating ${b.rating} of 5">${[1,2,3,4,5].map(n=>star(n<=b.rating)).join('')}</div>`:''}</div></aside>
  <div>
   <div class="bk-box"><div class="bk-acts"><button class="bk-act" id="bkS">${I(ic.share)}Share</button><button class="bk-act${fav?' on':''}" id="bkF">${I(ic.heart)}Favorite</button>${b.url?`<button class="bk-act" id="bkE">${I('<path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>')}Embed</button>`:''}<button class="bk-act" id="bkR">${I(ic.flag)}Report</button></div></div>
-  ${b.url?`<a class="bk-dl" id="bkDL" href="${esc(b.url)}" download>${I(ic.dl)} Download PDF${b.size?' ('+esc(b.size)+')':''}</a>`:`<button class="bk-dl" id="bkD">${I(ic.dl)} Download PDF</button>`}
+  ${b.url?`<a class="bk-dl" id="bkDL" href="${esc(b.url)}" target="_blank" rel="noopener" download>${I(ic.dl)} Download PDF${b.size?' ('+esc(b.size)+')':''}</a>`:`<button class="bk-dl" id="bkD">${I(ic.dl)} Download PDF</button>`}
   ${b.overview?`<div class="bk-box bk-ov" style="margin-top:16px"><h3>Overview</h3><p>${esc(b.overview)}</p></div>`:''}
   <div class="bk-box"><h3>Tags</h3><div class="bk-tags">${tags.map(t=>`<button class="bk-tag">${esc(t)}</button>`).join('')}</div></div>
  </div>
