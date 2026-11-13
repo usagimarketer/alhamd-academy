@@ -180,6 +180,8 @@ nav button.on .ic{transform:translateY(-3px) scale(1.12)}
 .bk-img{aspect-ratio:3/4;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px rgba(30,27,75,.25);background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:18px}
 .bk-img img{width:100%;height:100%;object-fit:cover}
 .bk-img.has-img{padding:0;background:none}
+.bk-imglink{display:block;border-radius:14px;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.bk-imglink:hover,.bk-imglink:focus-visible{transform:translateY(-3px);box-shadow:0 12px 26px rgba(79,70,229,.28);outline:none}
 .bk-img b{font:800 64px/1 Poppins,system-ui,sans-serif}.bk-img span{font-weight:700;font-size:17px;opacity:.95}.bk-img small{opacity:.8}
 .bk-stars{display:flex;justify-content:center;gap:3px;margin-top:12px;color:#f59e0b}
 .bk-stars svg{width:20px;height:20px;fill:currentColor;stroke:none}.bk-stars svg.off{color:var(--ln)}
@@ -658,7 +660,8 @@ function openNotes(p){
 const BOOKS={
   '9th Text Book':{cls:'9th',title:'9th Class Mathematics',
    cover:'./images/9th-math-cover.jpg', /* paste the book cover image URL between the quotes */
-   url:'', /* paste the PDF link here to activate the Download button */
+   url:'https://drive.google.com/uc?export=download&id=1MA2D2pgYCZRC-E83cncoClN0iS0I5SgL', /* download link */
+   view:'https://drive.google.com/file/d/1MA2D2pgYCZRC-E83cncoClN0iS0I5SgL/preview', /* read-online link */
    size:'',author:'PCTB',views:'0',downloads:'0',updated:'12 Nov 2026',year:'',session:'2025-27',rating:5,
    overview:'Class 9 Mathematics textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
   '10th Text Book':{cls:'10th',title:'10th Class Mathematics',
@@ -687,18 +690,20 @@ function openBook(b){
   heart:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>',
   flag:'<path d="M4 22V4M4 4h14l-2 5 2 5H4"/>'},
   star=on=>`<svg viewBox="0 0 24 24" class="${on?'':'off'}"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21.1 7 14.2 2 9.3l6.9-1z"/></svg>`;
- const meta=[['user','Author',b.author],['eye','Views',b.views],['dl','Downloads',b.downloads],['clock','Last Updated',b.updated],['cal','Publication Year',b.year],['cap','Session',b.session]].filter(m=>m[2]);
+ const CK='bkc_'+b.title;let cnt={v:0,d:0};try{cnt=Object.assign(cnt,JSON.parse(localStorage.getItem(CK)||'{}'))}catch(e){}
+ const bv=String((parseInt(b.views)||0)+cnt.v),bd=String((parseInt(b.downloads)||0)+cnt.d);
+ const meta=[['user','Author',b.author],['eye','Views',bv],['dl','Downloads',bd],['clock','Last Updated',b.updated],['cal','Publication Year',b.year],['cap','Session',b.session]].filter(m=>m[2]);
  const tags=[b.cls+' Class','Punjab Text Books','Mathematics'];
  let fav=false;try{fav=localStorage.getItem('fav_'+b.title)==='1'}catch(e){}
  $('#nb').innerHTML=`<div class="card"><div class="nbc"><button class="bcb" data-n="h">Home</button> › <button class="bcb" data-n="t">Punjab Text Books</button> › <button class="bcb" data-n="c">${esc(b.cls)} Class</button> › ${esc(b.title)}</div>
  <h1 style="color:var(--tx)">${esc(b.title)}</h1>
  <div class="bk-badges"><span class="bk-badge pdf">${I(ic.file)} PDF${b.size?' ('+esc(b.size)+')':''}</span><span class="bk-badge pub">${I(ic.globe)} PUBLIC</span></div>
- ${meta.length?`<div class="bk-box bk-top"><div class="bk-meta">${meta.map(m=>`<div>${I(ic[m[0]])}<span><small>${m[1]}</small><b>${esc(m[2])}</b></span></div>`).join('')}</div></div>`:''}
- <div class="bk"><aside><div class="bk-cover"><div class="bk-img${b.cover?' has-img':''}">${b.cover?`<img src="${esc(b.cover)}" alt="${esc(b.title)}">`:`<b>${parseInt(b.cls)}</b><span>Mathematics</span><small>Punjab Text Books</small>`}</div>
+ ${meta.length?`<div class="bk-box bk-top"><div class="bk-meta">${meta.map(m=>`<div data-mk="${m[1]}">${I(ic[m[0]])}<span><small>${m[1]}</small><b>${esc(m[2])}</b></span></div>`).join('')}</div></div>`:''}
+ <div class="bk"><aside><div class="bk-cover">${b.view?`<a class="bk-imglink" id="bkV" href="${esc(b.view)}" target="_blank" rel="noopener" title="Read online" aria-label="Read ${esc(b.title)} online">`:''}<div class="bk-img${b.cover?' has-img':''}">${b.cover?`<img src="${esc(b.cover)}" alt="${esc(b.title)}">`:`<b>${parseInt(b.cls)}</b><span>Mathematics</span><small>Punjab Text Books</small>`}</div>${b.view?'</a>':''}
   ${b.rating?`<div class="bk-stars" aria-label="Rating ${b.rating} of 5">${[1,2,3,4,5].map(n=>star(n<=b.rating)).join('')}</div>`:''}</div></aside>
  <div>
   <div class="bk-box"><div class="bk-acts"><button class="bk-act" id="bkS">${I(ic.share)}Share</button><button class="bk-act${fav?' on':''}" id="bkF">${I(ic.heart)}Favorite</button>${b.url?`<button class="bk-act" id="bkE">${I('<path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>')}Embed</button>`:''}<button class="bk-act" id="bkR">${I(ic.flag)}Report</button></div></div>
-  ${b.url?`<a class="bk-dl" href="${esc(b.url)}" target="_blank" rel="noopener">${I(ic.dl)} Download PDF${b.size?' ('+esc(b.size)+')':''}</a>`:`<button class="bk-dl" id="bkD">${I(ic.dl)} Download PDF</button>`}
+  ${b.url?`<a class="bk-dl" id="bkDl" href="${esc(b.url)}" target="_blank" rel="noopener" download>${I(ic.dl)} Download PDF${b.size?' ('+esc(b.size)+')':''}</a>`:`<button class="bk-dl" id="bkD">${I(ic.dl)} Download PDF</button>`}
   ${b.overview?`<div class="bk-box bk-ov" style="margin-top:16px"><h3>Overview</h3><p>${esc(b.overview)}</p></div>`:''}
   <div class="bk-box"><h3>Tags</h3><div class="bk-tags">${tags.map(t=>`<button class="bk-tag">${esc(t)}</button>`).join('')}</div></div>
  </div>
@@ -710,6 +715,9 @@ function openBook(b){
  box.querySelectorAll('[data-n]').forEach(x=>x.onclick=()=>{const k=x.dataset.n;k==='h'?go('home'):k==='t'?openTextBooks():INFO(b.cls+' Text Book')()});
  $('#bkS').onclick=async()=>{const d={title:b.title,text:b.title+' - AlHamd Online Academy',url:location.href.split('#')[0]};try{if(navigator.share){await navigator.share(d)}else{await navigator.clipboard.writeText(d.url);toast('Link copy ho gaya')}}catch(e){}};
  $('#bkF').onclick=e=>{fav=!fav;e.currentTarget.classList.toggle('on',fav);try{localStorage.setItem('fav_'+b.title,fav?'1':'0')}catch(x){}};
+ const bump=k=>{cnt[k]++;try{localStorage.setItem(CK,JSON.stringify(cnt))}catch(e){}const el=box.querySelector('[data-mk="'+(k==='v'?'Views':'Downloads')+'"] b');if(el)el.textContent=String((parseInt(k==='v'?b.views:b.downloads)||0)+cnt[k])};
+ const bkV=$('#bkV');if(bkV)bkV.onclick=()=>bump('v');
+ const bkDl=$('#bkDl');if(bkDl)bkDl.onclick=()=>bump('d');
  const bkD=$('#bkD');if(bkD)bkD.onclick=()=>toast('The download link will be available soon.');
  const bkE=$('#bkE');if(bkE)bkE.onclick=async()=>{try{await navigator.clipboard.writeText('<iframe src="'+b.url+'" width="100%" height="600" style="border:0"></iframe>');toast('Embed code copy ho gaya')}catch(e){}};
  $('#bkR').onclick=()=>{location.href='mailto:alhamdonlineacademy30@gmail.com?subject='+encodeURIComponent('Report: '+b.title)};
