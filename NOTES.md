@@ -126,3 +126,5 @@ Repo ka suggested layout:
 - Ek message mein poori request likhein
 - Limit khatam hone se pehle kahein: "ab tak ka summary likho" aur sections 7-9 update kar lein
 - Har bade change ke baad `index.html` ka backup le lein
+
+- 2026-11-13: Home category cards redesigned in Neon / Gradient Glow (cyberpunk) style (dark #14141c card, blurred pink-cyan-purple glow, cyan hover on links). Replaces the earlier glassmorphism .hc2 styling. Data, text, links, icons and JS unchanged.

@@ -227,13 +227,16 @@ a.bk-dl:hover,button.bk-dl:hover{background:#4338ca;transform:translateY(-3px);b
 :root[data-theme="dark"]{--gl-bg:rgba(255,255,255,.12);--gl-bd:rgba(255,255,255,.25);--gl-sh:0 8px 32px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.35);--gl-lk:rgba(255,255,255,.08);--gl-lkbd:rgba(255,255,255,.15);--gl-lkh:rgba(255,255,255,.16);--gl-glow:rgba(255,255,255,.2)}
 /* glowing orbs behind the glass (backdrop-filter needs colour to blur) */
 #site{background:radial-gradient(circle 380px at 12% 28%,rgba(79,70,229,.22),transparent 70%),radial-gradient(circle 420px at 88% 22%,rgba(168,85,247,.20),transparent 70%),radial-gradient(circle 380px at 72% 70%,rgba(236,72,153,.14),transparent 70%),radial-gradient(circle 360px at 20% 85%,rgba(56,189,248,.16),transparent 70%)}
-.hc2{position:relative;background:radial-gradient(120% 55% at 50% 0%,color-mix(in srgb,var(--c,#6a1bd1) 20%,transparent),transparent 70%),var(--gl-bg);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);border:1px solid var(--gl-bd);border-radius:20px;box-shadow:var(--gl-sh)}
-.hc2:hover{box-shadow:0 14px 40px rgba(60,70,140,.24),inset 0 1px 0 rgba(255,255,255,.5)}
-/* specular edge highlight (rim of light) */
-.hc2::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,rgba(255,255,255,.7),rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,.25));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
-/* glassy link buttons inside the cards */
-.hc2 .lk{background:var(--gl-lk);border:1px solid var(--gl-lkbd);border-radius:12px;transition:background .2s,box-shadow .2s,transform .2s}
-.hc2 .lk:hover{background:var(--gl-lkh);box-shadow:0 0 12px var(--gl-glow);transform:translateY(-1px)}
+/* ===== Neon / gradient-glow cards (cyberpunk) ===== */
+.hg{gap:20px}
+.hc2{position:relative;z-index:1;background:transparent;color:#f0f0f5;border:0;border-radius:20px;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;transition:all .3s ease}
+.hc2::before{content:"";position:absolute;inset:-3px;border-radius:23px;background:linear-gradient(45deg,#ff007f,#00f0ff,#7000ff);z-index:-2;filter:blur(18px);opacity:.6;transition:all .3s ease;pointer-events:none}
+.hc2::after{content:"";position:absolute;inset:0;border-radius:20px;background:#14141c;z-index:-1;pointer-events:none}
+.hc2:hover{transform:scale(1.02);box-shadow:none}
+.hc2:hover::before{opacity:1;filter:blur(25px)}
+.hc2 h3{color:#f0f0f5}
+.hc2 .lk{background:transparent;color:#e8e8f2;border:1px solid #2c2c3c;border-left:1px solid #2c2c3c;border-radius:10px;transition:all .3s ease}
+.hc2 .lk:hover{background:transparent;color:#00f0ff;border-color:#00f0ff;text-shadow:0 0 8px rgba(0,240,255,.7);box-shadow:0 0 12px rgba(0,240,255,.35),inset 0 0 8px rgba(0,240,255,.12)}
 /* glassy Trending pill */
 .trend{background:var(--gl-bg);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);border:1px solid var(--gl-bd);box-shadow:var(--gl-sh)}
 </style>
