@@ -627,7 +627,7 @@ function openNotes(p){
       'Biology': {bg:'#22c55e', icon:'🧬'},
       'Tarjuma-tul-Quran': {bg:'#047857', icon:'📖'}
     };
-    const defSubs = ['9th Class Pairing','9th Text Book'].includes(p[0])
+    const defSubs = ['9th Class Pairing','9th Text Book','10th Text Book','11th Text Book','12th Text Book'].includes(p[0])
       ? ['Urdu','English','Mathematics','Islamiat','Physics','Chemistry','Biology','Computer','Tarjuma-tul-Quran']
       : ['Urdu','English','Mathematics','Islamiat','Science','Computer','Pak Studies'];
     const keys = Object.keys(n).filter(k=>k!=='');
@@ -654,7 +654,7 @@ function openNotes(p){
  box.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{const i=+b.dataset.b;i===0?go('home'):openNotes(p.slice(0,i))});
  box.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{
    const sub = currentSubs[+b.dataset.k];
-   if(p.length===1 && BOOKS[p[0]] && sub==='Mathematics'){openBook(BOOKS[p[0]]);return}
+   if(p.length===1 && BOOKS[p[0]] && BOOKS[p[0]][sub]){openBook(BOOKS[p[0]][sub]);return}
    if(p.length===1 && p[0]==='9th Class Pairing' && sub==='Mathematics'){
      window.open('https://tinyurl.com/9-Math-Pairing-Scheme-2027','_blank','noopener');
      return;
@@ -665,28 +665,48 @@ function openNotes(p){
  $('#nback').onclick=()=>p.length>1?openNotes(p.slice(0,-1)):go('home');
  go('notes');window.scrollTo(0,0);
 }
+/* Class -> Subject -> book data. cover = image path, url = PDF download link, view = read-online link */
 const BOOKS={
-  '9th Text Book':{cls:'9th',title:'9th Class Mathematics',
-   cover:'./images/9th-math-cover.jpg', /* paste the book cover image URL between the quotes */
-   url:'https://drive.google.com/uc?export=download&id=1MA2D2pgYCZRC-E83cncoClN0iS0I5SgL', /* download link */
-   view:'https://drive.google.com/file/d/1MA2D2pgYCZRC-E83cncoClN0iS0I5SgL/preview', /* read-online link */
-   size:'',author:'PCTB',views:'0',downloads:'0',updated:'12 Nov 2026',year:'',session:'2025-27',rating:5,
-   overview:'Class 9 Mathematics textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
-  '10th Text Book':{cls:'10th',title:'10th Class Mathematics',
-   cover:'', /* paste the book cover image URL between the quotes */
-   url:'', /* paste the PDF link here to activate the Download button */
-   size:'',author:'PCTB',views:'0',downloads:'0',updated:'12 Nov 2026',year:'',session:'2025-27',rating:5,
-   overview:'Class 10 Mathematics textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
-  '11th Text Book':{cls:'11th',title:'11th Class Mathematics',
-   cover:'', /* paste the book cover image URL between the quotes */
-   url:'', /* paste the PDF link here to activate the Download button */
-   size:'',author:'PCTB',views:'0',downloads:'0',updated:'12 Nov 2026',year:'',session:'2025-27',rating:5,
-   overview:'Class 11 Mathematics textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
-  '12th Text Book':{cls:'12th',title:'12th Class Mathematics',
-   cover:'', /* paste the book cover image URL between the quotes */
-   url:'', /* paste the PDF link here to activate the Download button */
-   size:'',author:'PCTB',views:'0',downloads:'0',updated:'12 Nov 2026',year:'',session:'2025-27',rating:5,
-   overview:'Class 12 Mathematics textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'}
+  '9th Text Book': {
+    'Mathematics': {cls:'9th', title:'9th Class Mathematics', cover:'./images/9th-math-cover.jpg', url:'https://drive.google.com/uc?export=download&id=1MA2D2pgYCZRC-E83cncoClN0iS0I5SgL', view:'https://drive.google.com/file/d/1MA2D2pgYCZRC-E83cncoClN0iS0I5SgL/preview', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 9 Mathematics textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Physics': {cls:'9th', title:'9th Class Physics', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 9 Physics textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Chemistry': {cls:'9th', title:'9th Class Chemistry', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 9 Chemistry textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Biology': {cls:'9th', title:'9th Class Biology', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 9 Biology textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'English': {cls:'9th', title:'9th Class English', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 9 English textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Urdu': {cls:'9th', title:'9th Class Urdu', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 9 Urdu textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Islamiat': {cls:'9th', title:'9th Class Islamiat', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 9 Islamiat textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Computer': {cls:'9th', title:'9th Class Computer', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 9 Computer textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'}
+  },
+  '10th Text Book': {
+    'Mathematics': {cls:'10th', title:'10th Class Mathematics', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 10 Mathematics textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Physics': {cls:'10th', title:'10th Class Physics', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 10 Physics textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Chemistry': {cls:'10th', title:'10th Class Chemistry', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 10 Chemistry textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Biology': {cls:'10th', title:'10th Class Biology', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 10 Biology textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'English': {cls:'10th', title:'10th Class English', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 10 English textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Urdu': {cls:'10th', title:'10th Class Urdu', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 10 Urdu textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Islamiat': {cls:'10th', title:'10th Class Islamiat', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 10 Islamiat textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Computer': {cls:'10th', title:'10th Class Computer', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 10 Computer textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'}
+  },
+  '11th Text Book': {
+    'Mathematics': {cls:'11th', title:'11th Class Mathematics', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 11 Mathematics textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Physics': {cls:'11th', title:'11th Class Physics', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 11 Physics textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Chemistry': {cls:'11th', title:'11th Class Chemistry', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 11 Chemistry textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Biology': {cls:'11th', title:'11th Class Biology', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 11 Biology textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'English': {cls:'11th', title:'11th Class English', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 11 English textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Urdu': {cls:'11th', title:'11th Class Urdu', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 11 Urdu textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Islamiat': {cls:'11th', title:'11th Class Islamiat', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 11 Islamiat textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Computer': {cls:'11th', title:'11th Class Computer', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 11 Computer textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'}
+  },
+  '12th Text Book': {
+    'Mathematics': {cls:'12th', title:'12th Class Mathematics', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 12 Mathematics textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Physics': {cls:'12th', title:'12th Class Physics', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 12 Physics textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Chemistry': {cls:'12th', title:'12th Class Chemistry', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 12 Chemistry textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Biology': {cls:'12th', title:'12th Class Biology', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 12 Biology textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'English': {cls:'12th', title:'12th Class English', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 12 English textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Urdu': {cls:'12th', title:'12th Class Urdu', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 12 Urdu textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Islamiat': {cls:'12th', title:'12th Class Islamiat', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 12 Islamiat textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Computer': {cls:'12th', title:'12th Class Computer', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 12 Computer textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'}
+  }
 };
 function openBook(b){
  const I=d=>`<svg viewBox="0 0 24 24">${d}</svg>`,
@@ -698,16 +718,17 @@ function openBook(b){
   heart:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>',
   flag:'<path d="M4 22V4M4 4h14l-2 5 2 5H4"/>'},
   star=on=>`<svg viewBox="0 0 24 24" class="${on?'':'off'}"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21.1 7 14.2 2 9.3l6.9-1z"/></svg>`;
+ const subj=b.title.replace(/^\d+th Class /,''),kin=BOOKS[b.cls+' Text Book']||{};
  const CK='bkc_'+b.title;let cnt={v:0,d:0};try{cnt=Object.assign(cnt,JSON.parse(localStorage.getItem(CK)||'{}'))}catch(e){}
  const bv=String((parseInt(b.views)||0)+cnt.v),bd=String((parseInt(b.downloads)||0)+cnt.d);
  const meta=[['user','Author',b.author],['eye','Views',bv],['dl','Downloads',bd],['clock','Last Updated',b.updated],['cal','Publication Year',b.year],['cap','Session',b.session]].filter(m=>m[2]);
- const tags=[b.cls+' Class','Punjab Text Books','Mathematics'];
+ const tags=[b.cls+' Class','Punjab Text Books',subj];
  let fav=false;try{fav=localStorage.getItem('fav_'+b.title)==='1'}catch(e){}
  $('#nb').innerHTML=`<div class="card"><div class="nbc"><button class="bcb" data-n="h">Home</button> › <button class="bcb" data-n="t">Punjab Text Books</button> › <button class="bcb" data-n="c">${esc(b.cls)} Class</button> › ${esc(b.title)}</div>
  <h1 style="color:var(--tx)">${esc(b.title)}</h1>
  <div class="bk-badges"><span class="bk-badge pdf">${I(ic.file)} PDF${b.size?' ('+esc(b.size)+')':''}</span><span class="bk-badge pub">${I(ic.globe)} PUBLIC</span></div>
  ${meta.length?`<div class="bk-box bk-top"><div class="bk-meta">${meta.map(m=>`<div data-mk="${m[1]}">${I(ic[m[0]])}<span><small>${m[1]}</small><b>${esc(m[2])}</b></span></div>`).join('')}</div></div>`:''}
- <div class="bk"><aside><div class="bk-cover">${b.view?`<a class="bk-imglink" id="bkV" href="${esc(b.view)}" target="_blank" rel="noopener" title="Read online" aria-label="Read ${esc(b.title)} online">`:''}<div class="bk-img${b.cover?' has-img':''}">${b.cover?`<img src="${esc(b.cover)}" alt="${esc(b.title)}">`:`<b>${parseInt(b.cls)}</b><span>Mathematics</span><small>Punjab Text Books</small>`}</div>${b.view?'</a>':''}
+ <div class="bk"><aside><div class="bk-cover">${b.view?`<a class="bk-imglink" id="bkV" href="${esc(b.view)}" target="_blank" rel="noopener" title="Read online" aria-label="Read ${esc(b.title)} online">`:''}<div class="bk-img${b.cover?' has-img':''}">${b.cover?`<img src="${esc(b.cover)}" alt="${esc(b.title)}">`:`<b>${parseInt(b.cls)}</b><span>${esc(subj)}</span><small>Punjab Text Books</small>`}</div>${b.view?'</a>':''}
   ${b.rating?`<div class="bk-stars" aria-label="Rating ${b.rating} of 5">${[1,2,3,4,5].map(n=>star(n<=b.rating)).join('')}</div>`:''}</div></aside>
  <div>
   <div class="bk-box"><div class="bk-acts"><button class="bk-act" id="bkS">${I(ic.share)}Share</button><button class="bk-act${fav?' on':''}" id="bkF">${I(ic.heart)}Favorite</button>${b.url?`<button class="bk-act" id="bkE">${I('<path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>')}Embed</button>`:''}<button class="bk-act" id="bkR">${I(ic.flag)}Report</button></div></div>
@@ -716,10 +737,10 @@ function openBook(b){
   <div class="bk-box"><h3>Tags</h3><div class="bk-tags">${tags.map(t=>`<button class="bk-tag">${esc(t)}</button>`).join('')}</div></div>
  </div>
  <div class="bk-box bk-copy" style="margin:0"><b style="color:var(--tx)">Copyright Policy</b><br>This textbook is provided for educational purposes only. All rights remain with the original publisher and the Punjab Curriculum and Textbook Board. If you are the copyright owner and would like this book removed, please contact us and it will be taken down promptly.</div>
- <section class="bk-rel"><h2>Related Textbooks</h2><div class="bk-relgrid">${['Physics','Chemistry','Biology'].map(sub=>`<button class="bk-relcard" data-rel="1"><span class="bk-relimg" aria-hidden="true">${I('<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5zM19 19v2H6M8 7h7M8 11h5"/>')}</span><b>${esc(b.cls)} Class ${sub}</b><small>Punjab Text Books</small></button>`).join('')}</div></section>
+ <section class="bk-rel"><h2>Related Textbooks</h2><div class="bk-relgrid">${Object.keys(kin).filter(k=>k!==subj).slice(0,3).map(sub=>`<button class="bk-relcard" data-rel="${esc(sub)}"><span class="bk-relimg" aria-hidden="true">${I('<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5zM19 19v2H6M8 7h7M8 11h5"/>')}</span><b>${esc(b.cls)} Class ${sub}</b><small>Punjab Text Books</small></button>`).join('')}</div></section>
  </div></div>`;
  const box=$('#nb');
- box.querySelectorAll('[data-rel]').forEach(x=>x.onclick=()=>INFO(b.cls+' Text Book')());
+ box.querySelectorAll('[data-rel]').forEach(x=>x.onclick=()=>openBook(kin[x.dataset.rel]));
  box.querySelectorAll('[data-n]').forEach(x=>x.onclick=()=>{const k=x.dataset.n;k==='h'?go('home'):k==='t'?openTextBooks():INFO(b.cls+' Text Book')()});
  $('#bkS').onclick=async()=>{const d={title:b.title,text:b.title+' - AlHamd Online Academy',url:location.href.split('#')[0]};try{if(navigator.share){await navigator.share(d)}else{await navigator.clipboard.writeText(d.url);toast('Link copy ho gaya')}}catch(e){}};
  $('#bkF').onclick=e=>{fav=!fav;e.currentTarget.classList.toggle('on',fav);try{localStorage.setItem('fav_'+b.title,fav?'1':'0')}catch(x){}};

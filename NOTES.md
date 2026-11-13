@@ -104,13 +104,14 @@ Repo ka suggested layout:
 - [x] Punjab Text Books: "Choose Your Class" glass-style cards (9-12) (2026-11-12)
 - [x] Textbook detail page (Mathematics, 9th-12th): English text, metadata grid, 5-star rating, Indigo Download button, Related Textbooks, Copyright card; session 2025-27 (2026-11-12)
 - [x] 9th Mathematics: asli cover (`images/9th-math-cover.jpg`), Drive download + read-online links; Views/Downloads counters (sirf usi browser mein, localStorage) (2026-11-13)
+- [x] Text Books: `BOOKS` ab nested (Class -> Subject -> book); 9th-12th ke 8 subjects (Mathematics, Physics, Chemistry, Biology, English, Urdu, Islamiat, Computer) ke detail pages; related books ab usi class ke doosre subjects (2026-11-13)
 - [x] Logo base64 se `images/logo.jpg` mein shift (index.html halki); SEO + og tags (GitHub Pages URL `https://usagimarketer.github.io/alhamd-academy`); `word-break` fix (2026-11-13)
 
 ## 8. Aage ka kaam (TODO)
 - [ ] Netlify project public hone ki tasdeeq (incognito mein test)
 - [ ] Paper ke short aur long questions add karna (75 marks ka poora paper)
 - [ ] Notes, Text Books, Guess, Pairing, Past Papers pages mein title + link add/edit/delete ka option
-- [ ] 10th, 11th, 12th Mathematics textbook: PDF links (`url`/`view`) aur cover images `BOOKS` list mein bharna
+- [ ] Har kitab ke PDF links (`url`/`view`) aur cover images `BOOKS` mein bharna (abhi sirf 9th Mathematics ka hai); Tarjuma-tul-Quran ka `BOOKS` entry abhi nahi hai
 - [ ] Views/Downloads ki sab students ki total ginti ke liye backend/database (abhi har browser ki alag)
 - [ ] Jahan ab bhi "Guess" likha ho (Netlify/purani copies) wahan bhi Test Series karna
 
