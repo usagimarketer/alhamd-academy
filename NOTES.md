@@ -105,6 +105,7 @@ Repo ka suggested layout:
 - [x] Textbook detail page (Mathematics, 9th-12th): English text, metadata grid, 5-star rating, Indigo Download button, Related Textbooks, Copyright card; session 2025-27 (2026-11-12)
 - [x] 9th Mathematics: asli cover (`images/9th-math-cover.jpg`), Drive download + read-online links; Views/Downloads counters (sirf usi browser mein, localStorage) (2026-11-13)
 - [x] Text Books: `BOOKS` ab nested (Class -> Subject -> book); 9th-12th ke 8 subjects (Mathematics, Physics, Chemistry, Biology, English, Urdu, Islamiat, Computer) ke detail pages; related books ab usi class ke doosre subjects (2026-11-13)
+- [x] 10th Text Book: Islamiat ki jagah Pakistan Studies (grid aur `BOOKS` dono mein); 9th, 11th, 12th mein Islamiat (2026-11-13)
 - [x] Logo base64 se `images/logo.jpg` mein shift (index.html halki); SEO + og tags (GitHub Pages URL `https://usagimarketer.github.io/alhamd-academy`); `word-break` fix (2026-11-13)
 
 ## 8. Aage ka kaam (TODO)

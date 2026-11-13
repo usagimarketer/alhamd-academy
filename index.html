@@ -622,13 +622,14 @@ function openNotes(p){
       'Science': {bg:'#8b5cf6', icon:'🔬'},
       'Computer': {bg:'#3b82f6', icon:'💻'},
       'Pak Studies': {bg:'#10b981', icon:'🇵🇰'},
+      'Pakistan Studies': {bg:'#10b981', icon:'🇵🇰'},
       'Physics': {bg:'#7c3aed', icon:'⚛️'},
       'Chemistry': {bg:'#ec4899', icon:'🧪'},
       'Biology': {bg:'#22c55e', icon:'🧬'},
       'Tarjuma-tul-Quran': {bg:'#047857', icon:'📖'}
     };
     const defSubs = ['9th Class Pairing','9th Text Book','10th Text Book','11th Text Book','12th Text Book'].includes(p[0])
-      ? ['Urdu','English','Mathematics','Islamiat','Physics','Chemistry','Biology','Computer','Tarjuma-tul-Quran']
+      ? ['Urdu','English','Mathematics','Islamiat','Physics','Chemistry','Biology','Computer','Tarjuma-tul-Quran'].map(x=>p[0]==='10th Text Book'&&x==='Islamiat'?'Pakistan Studies':x)
       : ['Urdu','English','Mathematics','Islamiat','Science','Computer','Pak Studies'];
     const keys = Object.keys(n).filter(k=>k!=='');
     currentSubs = [...new Set([...keys, ...defSubs])];
@@ -685,7 +686,7 @@ const BOOKS={
     'Biology': {cls:'10th', title:'10th Class Biology', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 10 Biology textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
     'English': {cls:'10th', title:'10th Class English', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 10 English textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
     'Urdu': {cls:'10th', title:'10th Class Urdu', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 10 Urdu textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
-    'Islamiat': {cls:'10th', title:'10th Class Islamiat', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 10 Islamiat textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
+    'Pakistan Studies': {cls:'10th', title:'10th Class Pakistan Studies', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 10 Pakistan Studies textbook published by the Punjab Curriculum and Textbook Board (PCTB).'},
     'Computer': {cls:'10th', title:'10th Class Computer', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 10 Computer textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
     'Tarjuma-tul-Quran': {cls:'10th', title:'10th Class Tarjuma-tul-Quran', cover:'', url:'', view:'', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 10 Tarjuma-tul-Quran textbook published by the Punjab Curriculum and Textbook Board (PCTB).'}
   },
