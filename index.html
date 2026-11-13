@@ -677,9 +677,11 @@ function openNotes(p){
       'Biology': {bg:'#22c55e', icon:'🧬'},
       'Tarjuma-tul-Quran': {bg:'#047857', icon:'📖'}
     };
-    const defSubs = ['9th Class Pairing','9th Text Book','10th Text Book','11th Text Book','12th Text Book'].includes(p[0])
-      ? ['Urdu','English','Mathematics','Islamiat','Physics','Chemistry','Biology','Computer','Tarjuma-tul-Quran'].map(x=>p[0]==='10th Text Book'&&x==='Islamiat'?'Pakistan Studies':x)
-      : ['Urdu','English','Mathematics','Islamiat','Science','Computer','Pak Studies'];
+    const classPrefix = p[0].split(' ')[0]; // "9th", "10th", ...
+    const bookKey = classPrefix + ' Text Book';
+    let defSubs = [];
+    if (BOOKS[bookKey]) { defSubs = Object.keys(BOOKS[bookKey]); }
+    else { defSubs = ['Urdu','English','Mathematics','Islamiat','Science','Computer','Pak Studies']; }
     const keys = Object.keys(n).filter(k=>k!=='');
     currentSubs = [...new Set([...keys, ...defSubs])];
 
