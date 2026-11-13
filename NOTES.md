@@ -111,7 +111,7 @@ Repo ka suggested layout:
 - [ ] Netlify project public hone ki tasdeeq (incognito mein test)
 - [ ] Paper ke short aur long questions add karna (75 marks ka poora paper)
 - [ ] Notes, Text Books, Guess, Pairing, Past Papers pages mein title + link add/edit/delete ka option
-- [ ] Har kitab ke PDF links (`url`/`view`) aur cover images `BOOKS` mein bharna (abhi sirf 9th Mathematics ka hai); Tarjuma-tul-Quran ka `BOOKS` entry abhi nahi hai
+- [ ] Har kitab ke PDF links (`url`/`view`) aur cover images `BOOKS` mein bharna (abhi sirf 9th Mathematics ka hai); Tarjuma-tul-Quran ke entries bhi `BOOKS` mein hain (links khali)
 - [ ] Views/Downloads ki sab students ki total ginti ke liye backend/database (abhi har browser ki alag)
 - [ ] Jahan ab bhi "Guess" likha ho (Netlify/purani copies) wahan bhi Test Series karna
 
