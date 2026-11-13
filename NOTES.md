@@ -133,3 +133,4 @@ Repo ka suggested layout:
 - 2026-11-13: NOTES key renamed "Maths" -> "Mathematics" (10th Class Notes) so it matches BOOKS; no duplicate card. Audited: no other key mismatches.
 - 2026-11-13: GLOBAL Light Frosted Glass theme replaces the neon theme (neon CSS removed). Light vars forced in all modes, frosted .card/.hc2/.bk-box/.sidebar/.top/nav, bento .hg grid (first card spans 2x2; 1 column <=768px), glass-break click effect (CSS ::after + small click handler at end of script). .paper stays white/black. NOTE: the JS part of the request was cut off, so the click handler (sets --x/--y, toggles .is-breaking) is my own.
 - 2026-11-13: Royal Sapphire colour scheme: --pr #2563eb, --accent-light #eff6ff, blue hero gradient, blue body glow, blue glass-crack SVG, light-blue icon circles (.ci), blue hover shadows. Dark-purple nav/dropdown hover now blue. .paper untouched.
+- 2026-11-13: 10th Text Book > Chemistry: Drive url + view links added (cover still empty).
