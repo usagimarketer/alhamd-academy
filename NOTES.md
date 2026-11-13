@@ -95,11 +95,24 @@ Repo ka suggested layout:
 - [x] Hero banner ki neeche wali line ("Study with USama • Notes, Guess Papers...") hata di (2026-11-10)
 - [x] Hero banner: logo 150px (mobile 110px) aur naam 48px (mobile 34px) bara kiya (2026-11-10)
 - [x] Backup v3 (2026-11-10)
+- [x] Hero banner se 6 quick-link buttons hata diye; ab social buttons (WhatsApp, TikTok, Instagram, Facebook, Contact) hain, asli links ke saath (2026-11-11)
+- [x] "Guess Papers" ka naam "Test Series" kiya; "Punjab Notes" ka naam "Notes"; Test Series ka icon 📝 (2026-11-11)
+- [x] Notes browser: class kholne par subject cards (rang wale boxes); khali section ka message (2026-11-11)
+- [x] Home par Categories sidebar (accordion): hero upar poori width, neeche sidebar + content. Smart Syllabus Exam 2027 mein 9th aur 11th ke asli Drive links (2026-11-11)
+- [x] 9th Class Pairing aur 9th Text Book ke subjects: Urdu, English, Mathematics, Islamiat, Physics, Chemistry, Biology, Computer, Tarjuma-tul-Quran (baqi classes mein Science/Pak Studies pehle jaise) (2026-11-12/13)
+- [x] 9th Pairing > Mathematics: pairing scheme link naye tab mein (2026-11-12)
+- [x] Punjab Text Books: "Choose Your Class" glass-style cards (9-12) (2026-11-12)
+- [x] Textbook detail page (Mathematics, 9th-12th): English text, metadata grid, 5-star rating, Indigo Download button, Related Textbooks, Copyright card; session 2025-27 (2026-11-12)
+- [x] 9th Mathematics: asli cover (`images/9th-math-cover.jpg`), Drive download + read-online links; Views/Downloads counters (sirf usi browser mein, localStorage) (2026-11-13)
+- [x] Logo base64 se `images/logo.jpg` mein shift (index.html halki); SEO + og tags (GitHub Pages URL `https://usagimarketer.github.io/alhamd-academy`); `word-break` fix (2026-11-13)
 
 ## 8. Aage ka kaam (TODO)
 - [ ] Netlify project public hone ki tasdeeq (incognito mein test)
 - [ ] Paper ke short aur long questions add karna (75 marks ka poora paper)
 - [ ] Notes, Text Books, Guess, Pairing, Past Papers pages mein title + link add/edit/delete ka option
+- [ ] 10th, 11th, 12th Mathematics textbook: PDF links (`url`/`view`) aur cover images `BOOKS` list mein bharna
+- [ ] Views/Downloads ki sab students ki total ginti ke liye backend/database (abhi har browser ki alag)
+- [ ] Jahan ab bhi "Guess" likha ho (Netlify/purani copies) wahan bhi Test Series karna
 
 ## 9. Known masle / notes
 - (yahan likhein)
