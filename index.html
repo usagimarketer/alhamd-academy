@@ -493,7 +493,25 @@ const PP_BOARDS = ['BWP', 'LHR', 'SGD', 'GUJ', 'RWP', 'MTN', 'SWL', 'FBD', 'DGK'
 const PP_LINKS = {
   // '9th|Urdu|2026|BWP': 'https://drive.google.com/...',
 };
-const ppUrl = (cls, subject, year, board) => PP_LINKS[cls+'|'+subject+'|'+year+'|'+board] || '#';
+const PAST_PAPERS_LINKS = {
+  '9th_Physics': {
+    '2026': {
+      'BWP': 'https://drive.google.com/...', // dummy link for now
+      'LHR': 'https://drive.google.com/...',
+      'SGD': 'https://drive.google.com/...',
+      'GUJ': 'https://drive.google.com/...',
+      'RWP': 'https://drive.google.com/...',
+      'MTN': 'https://drive.google.com/...',
+      'SWL': 'https://drive.google.com/...',
+      'FBD': 'https://drive.google.com/...',
+      'DGK': 'https://drive.google.com/...'
+    }
+  }
+};
+const ppUrl = (cls, subject, year, board) => {
+  const d = PAST_PAPERS_LINKS[cls+'_'+subject];
+  return (d && d[year] && d[year][board]) || PP_LINKS[cls+'|'+subject+'|'+year+'|'+board] || '#';
+};
 const BOOKS={
   '9th Text Book': {
     'Mathematics': {cls:'9th', title:'9th Class Mathematics', cover:'./images/9th-math-cover.jpg', url:'https://drive.google.com/uc?export=download&id=1MA2D2pgYCZRC-E83cncoClN0iS0I5SgL', view:'https://drive.google.com/file/d/1MA2D2pgYCZRC-E83cncoClN0iS0I5SgL/preview', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 9 Mathematics textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},
@@ -620,6 +638,17 @@ document.addEventListener('input', function(e) {
   // Search Notes/Past Papers
   ['9th Class Notes', '10th Class Notes', '11th Class Notes', '12th Class Notes'].forEach(n => {
      if(n.toLowerCase().includes(query)) results.push({ text: n, action: INFO(n) });
+  });
+
+  // Search Past Papers ("9th Physics Past Papers")
+  const words = query.split(/\s+/);
+  ['9th', '10th', '11th', '12th'].forEach(c => {
+    Object.keys(BOOKS[c + ' Text Book'] || {}).forEach(sub => {
+      const label = c + ' ' + sub + ' Past Papers';
+      if (words.every(w => label.toLowerCase().includes(w))) {
+        results.push({ text: label, action: () => openPastPapers(c, sub) });
+      }
+    });
   });
 
   // Render Results

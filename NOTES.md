@@ -157,3 +157,4 @@ Repo ka suggested layout:
 - 2026-11-14: Home cards now match top menu exactly and in order: Text Books, Notes, Pairing Schemes, Test Series, Past Papers (renamed from "Past Papers (Punjab)"), Results (new, 📊 icon added to IC).
 - 2026-11-14: Added PROJECT_CONTEXT.md (resume summary for new chats).
 - 2026-11-14: PROJECT_CONTEXT.md updated with a quick "latest changes" section.
+- 2026-11-15: Global search ab '<class> <subject> Past Papers' bhi dhoondta hai (limit 8); PAST_PAPERS_LINKS (sample 9th_Physics 2026, dummy links) add, ppUrl() pehle ise dekhta hai phir PP_LINKS.
