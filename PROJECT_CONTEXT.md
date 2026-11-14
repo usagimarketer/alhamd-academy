@@ -4,6 +4,11 @@ Owner: Sir USama (MS Mathematics, Punjab). Languages: Roman Urdu + English.
 Repo: `usagimarketer/alhamd-academy` (branch `main`) · Live: https://usagimarketer.github.io/alhamd-academy
 Last updated: 2026-11-14 · Also see `NOTES.md` (running change log + TODO).
 
+## 0. Latest changes (quick list, newest state)
+- **UI/UX:** mobile speed optimised (no blur, solid white cards on mobile); home category cards are collapsible **accordions on all devices**; the **Sidebar is removed completely**; home cards match the top menu (Text Books, Notes, Pairing Schemes, Test Series, Past Papers, Results).
+- **Features:** global **Search bar** on Home (searches Book titles + 9th–12th Class Notes; NOT Past Papers, no Enter key); **Paper Maker app deleted** (not just hidden) and replaced by a Top Nav dropdown: **Paid = WhatsApp link, Free = PaperDesk link**.
+- **Pending:** real Google Drive links + cover images for the remaining books, and real Past Paper links (`PP_LINKS`, still `#` placeholders).
+
 ## 1. Project overview
 - Single-file static site: **`index.html`** (plain HTML + CSS + JS, no frameworks), plus `images/` (`logo.jpg`, `9th-math-cover.jpg`, `10th-chemistry-cover.webp`), `NOTES.md`, `README.md`.
 - Pages are `<section class="pg" id="p-...">`: `p-home`, `p-info`, `p-notes` (all Notes / Past Papers / Text Book pages render into `#nb`). `go(t)` switches pages.

@@ -156,3 +156,4 @@ Repo ka suggested layout:
 - 2026-11-14: Sidebar (Categories) removed completely (HTML, JS, CSS); main content full width, cards grid auto-fill 240px. NOTE: Smart Syllabus Exam 2027 (9th/11th Drive links) existed only in the sidebar and is now gone from the site; re-add as a card/menu item if needed (links are in git history, commit 290bb0e).
 - 2026-11-14: Home cards now match top menu exactly and in order: Text Books, Notes, Pairing Schemes, Test Series, Past Papers (renamed from "Past Papers (Punjab)"), Results (new, 📊 icon added to IC).
 - 2026-11-14: Added PROJECT_CONTEXT.md (resume summary for new chats).
+- 2026-11-14: PROJECT_CONTEXT.md updated with a quick "latest changes" section.
