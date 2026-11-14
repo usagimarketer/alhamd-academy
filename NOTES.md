@@ -149,3 +149,4 @@ Repo ka suggested layout:
 - 2026-11-14: Search bar CSS replaced with user version (.search-input/.search-results/.search-item); result rows are now div.search-item.
 - 2026-11-14: Search JS replaced with user version (document-level input listener; searches Book titles + 9th-12th Class Notes only, min 2 chars, no Enter/past-papers search). Previous richer version (Past Papers + per-subject Notes + menu links) is in git history (commit 30dc509).
 - 2026-11-14: PAPER MAKER REMOVED completely (sections, JS, access-code gate, MathJax, bottom nav, unused CSS). File 147 KB -> ~70 KB. Top menu "Paper Maker" now has only Paid Service / Free Service (both show a "Coming soon" toast). Old full version is in git tag backup-before-paper-maker-removal (commit 71ab0a4). The access code AH-F7R9JN and paper-backup.json are no longer used.
+- 2026-11-14: Paper Maker menu > Free Service now opens https://paperdesk.whisperperks.com/ in a new tab (Paid Service still "Coming soon").
