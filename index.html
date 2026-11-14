@@ -217,6 +217,8 @@ body{min-height:100vh;background-color:var(--bg);background-image:radial-gradien
 .lk:hover, .bk-tag:hover, .bk-act:hover{background:#ffffff;color:var(--pr);border-color:rgba(255,255,255,0.8);box-shadow:0 4px 10px rgba(0,0,0,0.05)}
 .hc2 .lk{color:var(--mu)}
 .hc2 h3{color:var(--tx)}
+/* Smart Syllabus highlight */
+.highlight-card{border:2px solid #ef4444 !important;box-shadow:0 0 15px rgba(239,68,68,0.2) !important;position:relative;overflow:visible !important}
 /* bento grid on home */
 .hg{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .hg>.hc2:first-child{grid-column:span 2;grid-row:span 2;align-self:stretch}
@@ -676,10 +678,12 @@ const CL=s=>['9th','10th','11th','12th'].map(x=>{const n=x+' '+s;return [n,INFO(
 const TB=['Punjab Text Books','Sindh Text Books','KPK Text Books','Federal Text Books','Balochistan Text Books','SNC Text Books'].map(n=>[n,INFO(n)]);
 TB[0][1]=openTextBooks;
 const SITE=[
+ {t:'Smart Syllabus 2027', c:'#ef4444', k:'📑', l:[['9th Class Syllabus', () => window.open('https://drive.google.com/file/d/1Pyjevb4jM8RkniMj-XBjvL4_vrcTpJI6/view?usp=drive_link', '_blank')], ['11th Class Syllabus', () => window.open('https://drive.google.com/file/d/1mOB6A6Q0jyB3W3MXlP-56MmGxEurFBCz/view?usp=drive_link', '_blank')]]},
+ {t:'Pairing Schemes',c:'#9c27b0',k:'📋',l:CL('Class Pairing')},
+ {t:'Model Papers', c:'#f59e0b', k:'📝', l:CL('Model Papers')},
+ {t:'Test Series',c:'#2196f3',k:'📝',l:CL('Test Series')},
  {t:'Text Books',c:'#4caf50',k:'📚',l:TB},
  {t:'Notes',c:'#ff9800',k:'🎓',l:CL('Class Notes')},
- {t:'Pairing Schemes',c:'#9c27b0',k:'📋',l:CL('Class Pairing')},
- {t:'Test Series',c:'#2196f3',k:'📝',l:CL('Test Series')},
  {t:'Past Papers',c:'#e91e63',k:'📑',l:CL('Past Papers')},
  {t:'Results',c:'#10b981',k:'📊',l:CL('Class Result')}];
 const PMF=[['💎 Paid Service (WhatsApp)',()=>window.open('https://wa.me/923040947667?text=Assalam%20o%20Alaikum%20Sir,%20I%20want%20to%20know%20about%20the%20Paid%20Paper%20Maker%20Service.','_blank','noopener')],['Free Service',()=>window.open('https://paperdesk.whisperperks.com/','_blank','noopener')]];
@@ -695,7 +699,7 @@ function buildSite(){const top=$('.top');top.className='top dk';
  document.addEventListener('click',()=>{dd.hidden=true});$('#hmb').onclick=()=>go('home');
  const si=$('#sri');$('#srb').onclick=e=>{e.stopPropagation();si.hidden=!si.hidden;if(!si.hidden)si.focus()};si.onclick=e=>e.stopPropagation();
  si.oninput=()=>{go('home');const q=si.value.trim().toLowerCase();document.querySelectorAll('#site .lk').forEach(b=>{b.style.display=(!q||b.textContent.toLowerCase().includes(q))?'':'none'});document.querySelectorAll('#site .hc2').forEach(c=>{c.style.display=(!q||[...c.querySelectorAll('.lk')].some(b=>b.style.display!=='none'))?'':'none'})};
- const card=(c,i)=>`<div class="hc2" style="--c:${c.c}">${circ(c.k,c.c)}<h3>${c.t} <span class="toggle-icon" style="float:right; font-size:12px;">▼</span></h3><div class="link-list">${c.l.map((l,j)=>`<button class="lk" data-c="${i}" data-l="${j}">${l[0]}</button>`).join('')}</div></div>`;
+ const card=(c,i)=>{const hl=c.t.includes('Smart Syllabus');return `<div class="hc2${hl?' highlight-card':''}" style="--c:${c.c}">${circ(c.k,c.c)}<h3>${c.t}${hl?' <span style="background:#ef4444; color:#fff; font-size:10px; padding:2px 6px; border-radius:4px; margin-left:8px;">🔥 Important</span>':''} <span class="toggle-icon" style="float:right; font-size:12px;">▼</span></h3><div class="link-list">${c.l.map((l,j)=>`<button class="lk" data-c="${i}" data-l="${j}">${l[0]}</button>`).join('')}</div></div>`};
  const os=$('#site');if(os)os.remove();
  const site=document.createElement('div');site.id='site';
  const scr=i=>`document.querySelectorAll('#site .hc2')[${i}].scrollIntoView({behavior:'smooth',block:'center'})`;
