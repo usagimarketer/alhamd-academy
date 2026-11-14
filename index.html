@@ -654,52 +654,38 @@ const NOTES={
 };
 function dId(u){const m=String(u).match(/\/d\/([\w-]+)/)||String(u).match(/[?&]id=([\w-]+)/);return m?m[1]:''}
 function openPastPapers(cls, subject) {
-  const data = PAST_PAPERS_DATA[subject] || {};
-  const years = Object.keys(data).sort((a,b)=>b-a); // newest year first
-  const currentYear = years.length > 0 ? years[0] : null;
-
+  const currentYear = PP_YEARS[0];
   let html = `<div class="card">
     <div class="nbc"><button class="bcb" onclick="go('home')">Home</button> › <button class="bcb" onclick="INFO('${cls} Past Papers')()">Past Papers</button> › ${cls} ${subject}</div>
     <h1 style="color:var(--tx); margin-bottom:20px;">${cls} ${subject} - Past Papers</h1>`;
 
-  if (!currentYear) {
-    html += `<p>No papers uploaded yet.</p></div>`;
-    $('#nb').innerHTML = html; go('notes'); return;
-  }
-
   // Year Tabs
   html += `<div class="year-tabs" style="display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap;">`;
-  years.forEach(y => {
-    html += `<button class="btn year-btn ${y === currentYear ? '' : 'g'}" onclick="renderPastPapersGrid('${subject}', '${y}', this)">${y}</button>`;
+  PP_YEARS.forEach(y => {
+    html += `<button class="btn year-btn ${y === currentYear ? '' : 'g'}" onclick="renderPastPapersGrid('${cls}', '${subject}', '${y}', this)">${y}</button>`;
   });
-  html += `</div>`;
-
-  // Grid Container
-  html += `<div id="pp-grid" class="sub-grid"></div></div>`;
+  html += `</div><div id="pp-grid" class="sub-grid"></div></div>`;
 
   $('#nb').innerHTML = html;
-  renderPastPapersGrid(subject, currentYear);
+  renderPastPapersGrid(cls, subject, currentYear);
   go('notes'); window.scrollTo(0,0);
 }
 
-function renderPastPapersGrid(subject, year, btnElement) {
+function renderPastPapersGrid(cls, subject, year, btnElement) {
   if (btnElement) {
-    // Update active tab styling
     document.querySelectorAll('.year-btn').forEach(b => b.classList.add('g'));
     btnElement.classList.remove('g');
   }
-
-  const papers = PAST_PAPERS_DATA[subject][year] || [];
   let gridHtml = '';
-
-  papers.forEach(p => {
-    gridHtml += `<a href="${p.url}" target="_blank" rel="noopener" class="sub-card" style="background:var(--accent-light); border:1px solid rgba(37,99,235,0.2); text-decoration:none; padding:20px; align-items:flex-start;">
+  PP_BOARDS.forEach(board => {
+    const url = ppUrl(cls, subject, year, board);
+    const ok = url !== '#';
+    gridHtml += `<a href="${url}" ${ok ? 'target="_blank" rel="noopener"' : 'onclick="event.preventDefault();toast(\'Is paper ka link jald add kiya jayega\')"'} class="sub-card" style="background:var(--accent-light); border:1px solid rgba(37,99,235,0.2); text-decoration:none; padding:20px; align-items:flex-start;${ok ? '' : ' opacity:.65;'}">
       <div style="background:var(--pr); color:#fff; width:40px; height:40px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:bold; margin-bottom:10px;">PDF</div>
-      <div style="font-weight:700; color:var(--tx); font-size:16px;">${p.board}</div>
-      <div style="font-size:13px; color:var(--mu); margin-top:4px;">${p.group}</div>
+      <div style="font-weight:700; color:var(--tx); font-size:16px;">${board}</div>
+      <div style="font-size:13px; color:var(--mu); margin-top:4px;">${year}${ok ? '' : ' · jald'}</div>
     </a>`;
   });
-
   $('#pp-grid').innerHTML = gridHtml;
 }
 
@@ -772,18 +758,13 @@ function openNotes(p){
  go('notes');window.scrollTo(0,0);
 }
 /* Class -> Subject -> book data. cover = image path, url = PDF download link, view = read-online link */
-const PAST_PAPERS_DATA = {
-  'Urdu': {
-    '2026': [
-      { board: 'BWP', url: 'https://drive.google.com/...', group: 'G1+G2' },
-      { board: 'DGK', url: 'https://drive.google.com/...', group: 'G1+G2' },
-      { board: 'FBD', url: 'https://drive.google.com/...', group: 'G1+G2' }
-    ],
-    '2024': [
-      { board: 'BWP', url: 'https://drive.google.com/...', group: 'BWP-24' }
-    ]
-  }
+const PP_YEARS = ['2026', '2024', '2023', '2022', '2021', '2019', '2018'];
+const PP_BOARDS = ['BWP', 'LHR', 'SGD', 'GUJ', 'RWP', 'MTN', 'SWL', 'FBD', 'DGK'];
+// Only real links are stored here, key = 'Class|Subject|Year|Board' (e.g. '9th|Urdu|2026|BWP'). Anything missing shows the '#' placeholder.
+const PP_LINKS = {
+  // '9th|Urdu|2026|BWP': 'https://drive.google.com/...',
 };
+const ppUrl = (cls, subject, year, board) => PP_LINKS[cls+'|'+subject+'|'+year+'|'+board] || '#';
 const BOOKS={
   '9th Text Book': {
     'Mathematics': {cls:'9th', title:'9th Class Mathematics', cover:'./images/9th-math-cover.jpg', url:'https://drive.google.com/uc?export=download&id=1MA2D2pgYCZRC-E83cncoClN0iS0I5SgL', view:'https://drive.google.com/file/d/1MA2D2pgYCZRC-E83cncoClN0iS0I5SgL/preview', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 9 Mathematics textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},

@@ -139,3 +139,4 @@ Repo ka suggested layout:
 - 2026-11-14: Past Papers step 1: added PAST_PAPERS_DATA (sample Urdu 2026/2024, placeholder links) above BOOKS. Dashboard UI not built yet (waiting for next steps).
 - 2026-11-14: Past Papers dashboard: openPastPapers()/renderPastPapersGrid() added; openNotes subject click on "<class> Past Papers" is intercepted. Years sorted newest first. Add papers in PAST_PAPERS_DATA[subject][year] = [{board,url,group}]. Data is class-independent (same for 9th/10th/11th/12th) for now.
 - 2026-11-14: .year-btn pill styling (Past Papers year tabs).
+- 2026-11-14: Past Papers now generated from PP_YEARS x PP_BOARDS for every class/subject (no per-paper objects). Real links go in PP_LINKS as "9th|Urdu|2026|BWP": url; missing ones show "#" placeholder card (toast "link jald add hoga"). PAST_PAPERS_DATA sample removed.
