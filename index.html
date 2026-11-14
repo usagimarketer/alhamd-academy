@@ -272,12 +272,20 @@ nav button .ic svg,nav button svg{stroke:var(--mu)}nav button.on .ic svg,nav but
 /* Past Papers year tabs */
 .year-btn { padding: 8px 24px; border-radius: 20px; border: 1px solid var(--pr); font-weight: 700; }
 .year-btn.g { background: transparent; color: var(--pr); }
-.board-card{text-align:left;background:var(--accent-light);border:1px solid rgba(37,99,235,0.2);text-decoration:none;padding:20px;align-items:flex-start;color:var(--tx)}
-.board-card.soon{opacity:.65}
-.board-icon{background:var(--pr);color:#fff;width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;margin-bottom:10px}
-.board-subject{font-weight:700;font-size:16px;color:var(--tx)}
-.board-year{font-size:13px;color:var(--mu);margin-top:4px}
-.board-name{font-size:13px;font-weight:700;color:var(--pr);margin-top:2px}
+.sub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; margin-top: 20px; }
+:root{--glass-bg:rgba(255,255,255,0.6);--glass-border:rgba(37,99,235,0.2);--text-main:var(--tx);--text-muted:var(--mu)}
+.board-card { 
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 20px 10px; 
+  text-decoration: none; text-align: center; transition: transform 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+.board-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.1); border-color: var(--pr); }
+.board-card.soon { opacity: .65; }
+.board-icon { background: var(--pr); color: #fff; padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 12px; margin-bottom: 12px; }
+.board-subject { font-weight: 700; color: var(--text-main); font-size: 15px; margin-bottom: 4px; }
+.board-year { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+.board-name { font-weight: 700; color: var(--pr); font-size: 14px; background: var(--accent-light); padding: 4px 12px; border-radius: 20px; }
 </style>
 </head>
 <body>

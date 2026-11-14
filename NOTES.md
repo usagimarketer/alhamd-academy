@@ -141,3 +141,4 @@ Repo ka suggested layout:
 - 2026-11-14: .year-btn pill styling (Past Papers year tabs).
 - 2026-11-14: Past Papers now generated from PP_YEARS x PP_BOARDS for every class/subject (no per-paper objects). Real links go in PP_LINKS as "9th|Urdu|2026|BWP": url; missing ones show "#" placeholder card (toast "link jald add hoga"). PAST_PAPERS_DATA sample removed.
 - 2026-11-14: Past Papers board card uses .board-card/.board-icon/.board-details template (e.g. Phy-9 / GI+GII-2026 / BWP). Subject abbreviations only for Physics, Chemistry, Biology, Mathematics, English; others use full name.
+- 2026-11-14: Board-card CSS replaced with user version (centered cards, 160px grid). .sub-grid is now 160px/15px gap globally (also affects Notes subject grids). Added alias vars --glass-bg/--glass-border/--text-main/--text-muted.
