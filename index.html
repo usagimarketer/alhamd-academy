@@ -306,6 +306,61 @@ nav button .ic svg,nav button svg{stroke:var(--mu)}nav button.on .ic svg,nav but
   .wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .paper { flex: none; max-width: none; zoom: 1 !important; } /* JS auto-fit zoom is overridden: paper keeps full size, user scrolls */
 }
+@media (max-width: 768px) {
+  /* 1. FIX PERFORMANCE: Remove blur, use solid colors */
+  .card, .hc2, .bk-box, .top-nav, .trending, .link-btn {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: #ffffff !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important; /* Lighter shadow */
+  }
+  /* hero + coloured subject cards keep their own colours (white bg would hide their white text) */
+  .hero2, .sub-card { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important; }
+  /* real class names used by this site: blur off everywhere on mobile */
+  .trend, .top, .top.dk, nav, .sidebar, .board-card { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  .trend { background: #ffffff !important; }
+  body { background-image: none !important; background-color: #f8fafc !important; }
+
+  /* 2. FIX HERO BANNER: Make it compact */
+  .hero2 {
+    padding: 15px !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+  }
+  .hero2 img { width: 50px !important; height: 50px !important; }
+  .hero2 h1 { font-size: 20px !important; margin-bottom: 2px !important; }
+  .hero2 p { font-size: 12px !important; }
+  .hero-socials, .social-bar { display: none !important; } /* Hide social buttons to save space */
+
+  /* 3. FIX CATEGORIES (Bento Grid): 2 columns, less padding */
+  .hg { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  .hc2:first-child { grid-column: span 2 !important; grid-row: span 1 !important; }
+  .card, .hc2 { padding: 15px !important; border-radius: 16px !important; }
+  .card h3 { font-size: 16px !important; margin-bottom: 10px !important; }
+  .icon-box, .ci { width: 36px !important; height: 36px !important; font-size: 18px !important; margin-bottom: 8px !important; }
+  
+  /* 4. FIX LINKS: Smaller, tighter */
+  .link-btn { padding: 10px 12px !important; font-size: 13px !important; margin-bottom: 6px !important; }
+  
+  /* 5. FIX TOP NAV: Make it a compact sticky bar */
+  .top { padding: 0 10px !important; height: 50px !important; }
+  .top h1 { font-size: 16px !important; }
+  .top-nav { height: 50px !important; padding: 0 10px !important; }
+  .top-nav span { padding: 0 10px !important; font-size: 13px !important; }
+  .top.dk, .top.dk button { height: 50px !important; }
+  .top.dk button { padding: 0 10px !important; font-size: 13px !important; }
+  
+  /* 6. FIX TRENDING TICKER */
+  .trending, .trend { margin-bottom: 15px !important; font-size: 12px !important; }
+  .trending-badge, .trend .tb { padding: 4px 10px !important; font-size: 11px !important; }
+
+  /* 7. FIX PAST PAPERS GRID */
+  .sub-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+  .board-card { padding: 12px 8px !important; }
+  .board-name { font-size: 12px !important; padding: 2px 8px !important; }
+}
 </style>
 </head>
 <body>
