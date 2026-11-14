@@ -218,13 +218,10 @@ body{min-height:100vh;background-color:var(--bg);background-image:radial-gradien
 .hc2 .lk{color:var(--mu)}
 .hc2 h3{color:var(--tx)}
 /* Smart Syllabus highlight */
-.highlight-card{border:2px solid #ef4444 !important;box-shadow:0 0 15px rgba(239,68,68,0.2) !important;position:relative;overflow:visible !important}
+.highlight-card{border:1px solid #ef4444 !important;box-shadow:0 0 0 1px #ef4444,0 0 15px rgba(239,68,68,0.2) !important;position:relative;overflow:visible !important}
 /* bento grid on home */
-.hg{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.hg>.hc2:first-child{grid-column:span 2;grid-row:span 2;align-self:stretch}
-@media(max-width:768px){.hg{grid-template-columns:1fr}
-.hg>.hc2:first-child{grid-column:auto;grid-row:auto}
-}
+.hg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+@media(max-width:768px){.hg{grid-template-columns:1fr}}
 .top.dk button:not(.on) .ic svg{stroke:var(--tx)}
 /* ===== Royal Sapphire accent ===== */
 .hero2{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 50%,#60a5fa 100%);box-shadow:0 14px 34px rgba(37,99,235,.30)}
@@ -267,7 +264,6 @@ body{ overflow-x: hidden; line-height: 1.6; }
 .year-btn{ padding: 12px 24px; }
 .hc2 .lk, .card .lk, .lk{ font-size: 15px; }
 .hg{ grid-template-columns: 1fr; }
-.hg > .hc2:first-child{ grid-column: auto; grid-row: auto; }
 .sub-grid{ grid-template-columns: repeat(2, 1fr); }
 .year-tabs{ display: flex; flex-wrap: nowrap !important; overflow-x: auto; padding-bottom: 5px; -webkit-overflow-scrolling: touch; }
 .year-tabs .year-btn{ flex: 0 0 auto; }
@@ -298,8 +294,7 @@ body{ background-image: none !important; background-color: #f8fafc !important; }
 .social-bar{ display: none !important; }
 /* Hide social buttons to save space */
 /* 3. FIX CATEGORIES (Bento Grid): 2 columns, less padding */
-.hg{ grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
-.hc2:first-child{ grid-column: span 2 !important; grid-row: span 1 !important; }
+.hg{ grid-template-columns: 1fr !important; gap: 10px !important; }
 .card, .hc2{ padding: 15px !important; border-radius: 16px !important; }
 .card h3{ font-size: 16px !important; margin-bottom: 10px !important; }
 .ci{ width: 36px !important; height: 36px !important; font-size: 18px !important; margin-bottom: 8px !important; }
@@ -345,8 +340,6 @@ html, body{ overflow-x: hidden; max-width: 100vw; width: 100%; }
 .hc2 .ci { width: 40px; height: 40px; margin-bottom: 8px; }
 .hc2 .ci svg { width: 22px; height: 22px; }
 @media (min-width: 769px) {
-  .hg { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
-  .hg > .hc2:first-child { grid-column: auto; grid-row: auto; align-self: start; }
 }
 </style>
 </head>

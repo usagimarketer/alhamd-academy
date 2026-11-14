@@ -159,3 +159,4 @@ Repo ka suggested layout:
 - 2026-11-14: PROJECT_CONTEXT.md updated with a quick "latest changes" section.
 - 2026-11-15: Global search ab '<class> <subject> Past Papers' bhi dhoondta hai (limit 8); PAST_PAPERS_LINKS (sample 9th_Physics 2026, dummy links) add, ppUrl() pehle ise dekhta hai phir PP_LINKS.
 - 2026-11-15: Home cards reorder: Smart Syllabus 2027 (highlight-card + 🔥 Important badge, 9th/11th Drive links), Pairing, Model Papers (naya, placeholder), Test Series, Text Books, Notes, Past Papers, Results.
+- 2026-11-15: Bento grid hata diya: .hg ab auto-fill minmax(280px,1fr) (desktop), 1 column (mobile); sab cards same size. Smart Syllabus highlight 1px border + 1px ring (size same).
