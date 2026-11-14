@@ -162,3 +162,4 @@ Repo ka suggested layout:
 - 2026-11-15: Bento grid hata diya: .hg ab auto-fill minmax(280px,1fr) (desktop), 1 column (mobile); sab cards same size. Smart Syllabus highlight 1px border + 1px ring (size same).
 - 2026-11-15: NAV=SITE (top menu home cards jaisa order, Paper Maker menu hata); badge 'Important'->'New'; Smart Syllabus mein 10th/12th (link baqi, toast) + 🔥 New badge sab syllabus links par.
 - 2026-11-15: Badge ab emoji ke baghair gradient pill '.new-badge' (NEW) — card title, syllabus links, nav dropdown.
+- 2026-11-15: Paper Maker wapas main card (SITE ke aakhir mein; Paid WhatsApp + Free PaperDesk links); purana PMF const hata diya; nav mein bhi aa gaya (NAV=SITE).
