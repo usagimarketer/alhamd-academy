@@ -151,3 +151,4 @@ Repo ka suggested layout:
 - 2026-11-14: PAPER MAKER REMOVED completely (sections, JS, access-code gate, MathJax, bottom nav, unused CSS). File 147 KB -> ~70 KB. Top menu "Paper Maker" now has only Paid Service / Free Service (both show a "Coming soon" toast). Old full version is in git tag backup-before-paper-maker-removal (commit 71ab0a4). The access code AH-F7R9JN and paper-backup.json are no longer used.
 - 2026-11-14: Paper Maker menu > Free Service now opens https://paperdesk.whisperperks.com/ in a new tab (Paid Service still "Coming soon").
 - 2026-11-14: Paper Maker menu > Paid Service opens WhatsApp 923040947667 with a pre-filled message (new tab).
+- 2026-11-14: Mobile (<=768px): sidebar hidden, home category cards are accordions (.link-list wrapper added in card template, .toggle-icon chevron, click handler in buildSite). Desktop unchanged. NOTE: Smart Syllabus Exam 2027 links exist only in the sidebar, so they are not reachable on mobile now.
