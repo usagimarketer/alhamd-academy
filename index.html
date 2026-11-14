@@ -990,39 +990,48 @@ function openTextBooks(){
 }
 const INFO=t=>()=>{if(!NOTES[t])NOTES[t]={};openNotes([t])};
 /* ===== Global search with autocomplete ===== */
-function buildSearchIndex(){
-  const idx=[],seen=new Set();
-  const add=(label,tag,fn)=>{const k=label.toLowerCase();if(seen.has(k))return;seen.add(k);idx.push({label,tag,fn})};
-  for(const key in BOOKS)for(const sub in BOOKS[key]){const b=BOOKS[key][sub];add(b.title,'Text Book',()=>openBook(b))}
-  ['9th','10th','11th','12th'].forEach(c=>{
-    const subs=Object.keys(BOOKS[c+' Text Book']||{});
-    subs.forEach(sub=>{
-      add(c+' '+sub+' Past Papers','Past Papers',()=>openPastPapers(c,sub));
-      add(c+' '+sub+' Notes','Notes',()=>{const k=c+' Class Notes';if(!NOTES[k])NOTES[k]={};if(!NOTES[k][sub])NOTES[k][sub]={};openNotes([k,sub])});
-    });
+document.addEventListener('input', function(e) {
+  if (e.target.id !== 'globalSearch') return;
+  const query = e.target.value.toLowerCase().trim();
+  const resBox = document.getElementById('searchResults');
+  
+  if (query.length < 2) { resBox.style.display = 'none'; return; }
+  
+  let results = [];
+  // Search Books
+  for (const cls in BOOKS) {
+    for (const sub in BOOKS[cls]) {
+      const title = BOOKS[cls][sub].title || (cls + ' ' + sub);
+      if (title.toLowerCase().includes(query)) {
+        results.push({ text: title, action: () => openBook(BOOKS[cls][sub]) });
+      }
+    }
+  }
+  // Search Notes/Past Papers
+  ['9th Class Notes', '10th Class Notes', '11th Class Notes', '12th Class Notes'].forEach(n => {
+     if(n.toLowerCase().includes(query)) results.push({ text: n, action: INFO(n) });
   });
-  if(typeof ALL!=='undefined')ALL.forEach(g=>g.l.forEach(l=>add(l[0],g.t,l[1])));
-  return idx;
-}
-function initSearch(){
-  const inp=$('#globalSearch'),box=$('#searchResults');if(!inp||!box)return;
-  let idx=null,cur=[];
-  const hide=()=>{box.style.display='none'};
-  const run=r=>{hide();inp.value='';r.fn()};
-  const show=()=>{
-    const q=inp.value.trim().toLowerCase();if(!q){hide();return}
-    if(!idx)idx=buildSearchIndex();
-    const words=q.split(/\s+/);
-    cur=idx.filter(r=>{const t=(r.label+' '+r.tag).toLowerCase();return words.every(w=>t.includes(w))}).slice(0,8);
-    box.innerHTML=cur.length?cur.map((r,i)=>`<div class="search-item" data-i="${i}"><span>${esc(r.label)}</span><small>${esc(r.tag)}</small></div>`).join(''):'<div class="sr-none">Koi result nahi mila</div>';
-    box.style.display='block';
-    box.querySelectorAll('.search-item').forEach(b=>b.onclick=()=>run(cur[+b.dataset.i]));
-  };
-  inp.addEventListener('input',show);
-  inp.addEventListener('focus',show);
-  inp.addEventListener('keydown',e=>{if(e.key==='Enter'&&cur.length&&box.style.display!=='none'){e.preventDefault();run(cur[0])}else if(e.key==='Escape')hide()});
-  document.addEventListener('click',e=>{if(!e.target.closest('.search-container'))hide()});
-}
+
+  // Render Results
+  if (results.length > 0) {
+    resBox.innerHTML = results.slice(0, 8).map((r, i) => `<div class="search-item" data-idx="${i}">${r.text}</div>`).join('');
+    resBox.style.display = 'block';
+    resBox.querySelectorAll('.search-item').forEach((el, i) => {
+      el.onclick = () => { results[i].action(); resBox.style.display = 'none'; document.getElementById('globalSearch').value = ''; };
+    });
+  } else {
+    resBox.innerHTML = '<div class="search-item" style="color:var(--mu)">No results found</div>';
+    resBox.style.display = 'block';
+  }
+});
+
+// Hide search results when clicking outside
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.search-container')) {
+    const resBox = document.getElementById('searchResults');
+    if (resBox) resBox.style.display = 'none';
+  }
+});
 
 const CL=s=>['9th','10th','11th','12th'].map(x=>{const n=x+' '+s;return [n,INFO(n)]});
 const TB=['Punjab Text Books','Sindh Text Books','KPK Text Books','Federal Text Books','Balochistan Text Books','SNC Text Books'].map(n=>[n,INFO(n)]);
@@ -1138,7 +1147,7 @@ function buildSite(){const top=$('.top');top.className='top dk';
 
  $('#p-home').prepend(site);site.querySelectorAll('.lk').forEach(b=>b.onclick=()=>ALL[+b.dataset.c].l[+b.dataset.l][1]());
  let ti=0;const tt=$('#tt');if(tt){const tick=()=>{tt.style.opacity=0;setTimeout(()=>{tt.textContent=TIPS[ti++%TIPS.length];tt.style.opacity=1},250)};tick();setInterval(tick,4500)}
- initSearch()}
+}
 
 /* ===== Paper Maker access code ===== */
 const CODE_HASH="8d5c51fd47c1736e5c60dea4a423465c1362266348c2b1af8d7fcec8d62261a2";
