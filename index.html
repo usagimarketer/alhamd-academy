@@ -369,6 +369,13 @@ html, body { overflow-x: hidden; max-width: 100vw; width: 100%; }
   .wrap, .paper { max-width: 100% !important; overflow-x: hidden !important; }
   input, select, textarea { font-size: 16px !important; } /* Prevents iOS auto-zoom */
 }
+/* search bar */
+.search-input{width:100%;padding:14px 18px;font:inherit;font-size:16px;color:var(--tx);background:#fff;border:1px solid rgba(37,99,235,0.25);border-radius:30px;outline:none;box-shadow:0 4px 12px rgba(0,0,0,0.04);box-sizing:border-box}
+.search-input:focus{border-color:var(--pr);box-shadow:0 0 0 3px rgba(37,99,235,0.15)}
+.search-results{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:200;background:#fff;border:1px solid var(--ln);border-radius:16px;box-shadow:0 12px 30px rgba(37,99,235,0.15);overflow:hidden;max-height:60vh;overflow-y:auto}
+.sr-item{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid #eef2f7;padding:12px 16px;font:inherit;font-size:15px;color:var(--tx);cursor:pointer}
+.sr-item:last-child{border-bottom:0}.sr-item:hover,.sr-item:focus{background:var(--accent-light);color:var(--pr)}
+.sr-item small{color:var(--mu);font-size:12px;flex:none}.sr-none{padding:14px 16px;color:var(--mu)}
 </style>
 </head>
 <body>
@@ -972,6 +979,41 @@ function openTextBooks(){
  go('notes');window.scrollTo(0,0);
 }
 const INFO=t=>()=>{if(!NOTES[t])NOTES[t]={};openNotes([t])};
+/* ===== Global search with autocomplete ===== */
+function buildSearchIndex(){
+  const idx=[],seen=new Set();
+  const add=(label,tag,fn)=>{const k=label.toLowerCase();if(seen.has(k))return;seen.add(k);idx.push({label,tag,fn})};
+  for(const key in BOOKS)for(const sub in BOOKS[key]){const b=BOOKS[key][sub];add(b.title,'Text Book',()=>openBook(b))}
+  ['9th','10th','11th','12th'].forEach(c=>{
+    const subs=Object.keys(BOOKS[c+' Text Book']||{});
+    subs.forEach(sub=>{
+      add(c+' '+sub+' Past Papers','Past Papers',()=>openPastPapers(c,sub));
+      add(c+' '+sub+' Notes','Notes',()=>{const k=c+' Class Notes';if(!NOTES[k])NOTES[k]={};if(!NOTES[k][sub])NOTES[k][sub]={};openNotes([k,sub])});
+    });
+  });
+  if(typeof ALL!=='undefined')ALL.forEach(g=>g.l.forEach(l=>add(l[0],g.t,l[1])));
+  return idx;
+}
+function initSearch(){
+  const inp=$('#globalSearch'),box=$('#searchResults');if(!inp||!box)return;
+  let idx=null,cur=[];
+  const hide=()=>{box.style.display='none'};
+  const run=r=>{hide();inp.value='';r.fn()};
+  const show=()=>{
+    const q=inp.value.trim().toLowerCase();if(!q){hide();return}
+    if(!idx)idx=buildSearchIndex();
+    const words=q.split(/\s+/);
+    cur=idx.filter(r=>{const t=(r.label+' '+r.tag).toLowerCase();return words.every(w=>t.includes(w))}).slice(0,8);
+    box.innerHTML=cur.length?cur.map((r,i)=>`<button type="button" class="sr-item" data-i="${i}"><span>${esc(r.label)}</span><small>${esc(r.tag)}</small></button>`).join(''):'<div class="sr-none">Koi result nahi mila</div>';
+    box.style.display='block';
+    box.querySelectorAll('.sr-item').forEach(b=>b.onclick=()=>run(cur[+b.dataset.i]));
+  };
+  inp.addEventListener('input',show);
+  inp.addEventListener('focus',show);
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter'&&cur.length&&box.style.display!=='none'){e.preventDefault();run(cur[0])}else if(e.key==='Escape')hide()});
+  document.addEventListener('click',e=>{if(!e.target.closest('.search-container'))hide()});
+}
+
 const CL=s=>['9th','10th','11th','12th'].map(x=>{const n=x+' '+s;return [n,INFO(n)]});
 const TB=['Punjab Text Books','Sindh Text Books','KPK Text Books','Federal Text Books','Balochistan Text Books','SNC Text Books'].map(n=>[n,INFO(n)]);
 TB[0][1]=openTextBooks;
@@ -1032,7 +1074,10 @@ function buildSite(){const top=$('.top');top.className='top dk';
        <div id="cat-list"></div>
      </div>
      <div class="main-content">
-       <div class="trend"><span class="tb">Trending</span><span class="tt" id="tt"></span></div>
+       <div class="search-container" style="margin-bottom: 20px; position: relative;">
+  <input type="text" id="globalSearch" class="search-input" placeholder="🔍 Search books, notes, past papers..." autocomplete="off">
+  <div id="searchResults" class="search-results" style="display:none;"></div>
+</div>
        <div class="hg">${SITE.map((c,i)=>card(c,i)).join('')}</div>
        <div class="sec2">${circ('📄','#6a1bd1')}<div><h2>Paper Maker</h2><p>Apna paper khud banayein, dekhein aur print karein</p></div></div>
        <div class="hg">${HOME.map((c,i)=>card(c,i+SITE.length)).join('')}</div>
@@ -1082,7 +1127,8 @@ function buildSite(){const top=$('.top');top.className='top dk';
  });
 
  $('#p-home').prepend(site);site.querySelectorAll('.lk').forEach(b=>b.onclick=()=>ALL[+b.dataset.c].l[+b.dataset.l][1]());
- let ti=0;const tt=$('#tt'),tick=()=>{tt.style.opacity=0;setTimeout(()=>{tt.textContent=TIPS[ti++%TIPS.length];tt.style.opacity=1},250)};tick();setInterval(tick,4500)}
+ let ti=0;const tt=$('#tt');if(tt){const tick=()=>{tt.style.opacity=0;setTimeout(()=>{tt.textContent=TIPS[ti++%TIPS.length];tt.style.opacity=1},250)};tick();setInterval(tick,4500)}
+ initSearch()}
 
 /* ===== Paper Maker access code ===== */
 const CODE_HASH="8d5c51fd47c1736e5c60dea4a423465c1362266348c2b1af8d7fcec8d62261a2";
