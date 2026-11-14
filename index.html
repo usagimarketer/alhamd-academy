@@ -106,22 +106,8 @@ button[onclick="addCF()"]::after{content:' Jorein'}
 .sub-card:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,0.15)}
 .sub-ic{font-size:48px;margin-bottom:12px;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.2))}
 .sub-name{font-size:18px;font-weight:700;word-break:break-word}
-.sidebar-wrap{display:flex;gap:20px;align-items:flex-start;margin-top:20px}
-.sidebar{flex:0 0 280px;background:var(--card);border:1px solid var(--ln);border-radius:16px;padding:16px;position:sticky;top:80px;max-height:calc(100vh - 100px);overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,0.06)}
-.sidebar h3{color:var(--pr);font-size:18px;margin:0 0 16px;border-bottom:2px solid var(--pr);padding-bottom:8px}
-.cat-btn{display:flex;justify-content:space-between;align-items:center;width:100%;background:var(--bg);color:var(--tx);border:1px solid var(--ln);padding:12px 14px;border-radius:10px;margin-bottom:8px;font:inherit;font-weight:700;cursor:pointer;transition:all 0.2s}
-.cat-btn:hover{background:var(--pr);color:#fff;border-color:var(--pr);transform:translateX(4px)}
-.cat-btn.on{background:var(--pr);color:#fff;border-color:var(--pr)}
-.cat-btn .arrow{font-size:12px;transition:transform 0.3s}
-.cat-btn.on .arrow{transform:rotate(180deg)}
-.cat-sub{display:none;flex-direction:column;gap:4px;padding:4px 0 12px 12px;border-left:2px solid var(--pr);margin-left:14px;margin-bottom:8px}
-.cat-sub.on{display:flex}
-.cat-sub button{display:flex;justify-content:space-between;align-items:center;width:100%;background:none;border:0;color:var(--mu);text-align:left;padding:8px 10px;font:inherit;font-size:14px;cursor:pointer;border-radius:6px;transition:0.2s}
-.cat-sub button:hover{color:var(--pr);background:rgba(47,91,234,0.08)}
+.sidebar-wrap{display:block;margin-top:20px}
 .main-content{flex:1;min-width:0}
-@media(max-width:768px){.sidebar-wrap{flex-direction:column}
-.sidebar{width:100%;position:static}
-}
 .social-bar{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
 .social-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:30px;font-size:14px;font-weight:700;text-decoration:none;transition:all 0.2s;cursor:pointer;border:1.5px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.1);color:#fff}
 .social-btn:hover{transform:translateY(-3px);background:rgba(255,255,255,0.25);box-shadow:0 6px 16px rgba(0,0,0,0.2)}
@@ -216,7 +202,7 @@ a.bk-dl:hover, button.bk-dl:hover{background:#4338ca;transform:translateY(-3px);
 :root:root:root{--bg:#f0f4f8;--card:rgba(255,255,255,0.6);--tx:#0f172a;--mu:#334155;--pr:#2563eb;--accent-light:#eff6ff;--ln:rgba(255,255,255,0.9);color-scheme:light}
 html{background:#f0f4f8;min-height:100%}
 body{min-height:100vh;background-color:var(--bg);background-image:radial-gradient(circle at 10% 10%,rgba(37,99,235,0.06),transparent 40%),radial-gradient(circle at 90% 90%,rgba(37,99,235,0.04),transparent 40%);background-attachment:fixed;color:var(--tx)}
-.card, .hc2, .bk-box, .sidebar, .top, .top.dk{background:var(--card);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--ln);box-shadow:0 8px 24px rgba(0,0,0,0.04);color:var(--tx)}
+.card, .hc2, .bk-box, .top, .top.dk{background:var(--card);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--ln);box-shadow:0 8px 24px rgba(0,0,0,0.04);color:var(--tx)}
 .card, .hc2{position:relative}
 .hc2{border-radius:20px}
 .top, .top.dk{border-width:0 0 1px;border-bottom:1px solid var(--ln)}
@@ -294,7 +280,7 @@ body{ overflow-x: hidden; line-height: 1.6; }
 /* hero + coloured subject cards keep their own colours (white bg would hide their white text) */
 .hero2, .sub-card{ backdrop-filter: none !important; -webkit-backdrop-filter: none !important; box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important; }
 /* real class names used by this site: blur off everywhere on mobile */
-.top, .top.dk, .sidebar, .board-card{ backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+.top, .top.dk, .board-card{ backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
 body{ background-image: none !important; background-color: #f8fafc !important; }
 /* 2. FIX HERO BANNER: Make it compact */
 .hero2{
@@ -357,7 +343,7 @@ html, body{ overflow-x: hidden; max-width: 100vw; width: 100%; }
 .hc2 .ci { width: 40px; height: 40px; margin-bottom: 8px; }
 .hc2 .ci svg { width: 22px; height: 22px; }
 @media (min-width: 769px) {
-  .hg { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .hg { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
   .hg > .hc2:first-child { grid-column: auto; grid-row: auto; align-self: start; }
 }
 </style>
@@ -711,10 +697,6 @@ function buildSite(){const top=$('.top');top.className='top dk';
  site.innerHTML = `
    <div style="margin-bottom:20px">${hero}</div>
    <div class="sidebar-wrap">
-     <div class="sidebar">
-       <h3>📌 Categories</h3>
-       <div id="cat-list"></div>
-     </div>
      <div class="main-content">
        <div class="search-container" style="margin-bottom: 20px; position: relative;">
   <input type="text" id="globalSearch" class="search-input" placeholder="🔍 Search books, notes, past papers..." autocomplete="off">
@@ -724,47 +706,6 @@ function buildSite(){const top=$('.top');top.className='top dk';
        <div class="ftr">AlHamd Online Academy &bull; Sir USama (MS Mathematics)</div>
      </div>
    </div>`;
-
- const catData = [
-   {t:'Pairing Scheme', items: CL('Class Pairing')},
-   {t:'Test Series', items: CL('Test Series')},
-   {t:'Punjab Text Books', items: [['9th Text Book',INFO('9th Text Book')],['10th Text Book',INFO('10th Text Book')],['11th Text Book',INFO('11th Text Book')],['12th Text Book',INFO('12th Text Book')]]},
-   {t:'Smart Syllabus Exam 2027', items: [
-    ['9th Class Smart Syllabus <span style="font-size:16px">⬇️</span>', () => window.open('https://drive.google.com/file/d/1Pyjevb4jM8RkniMj-XBjvL4_vrcTpJI6/view?usp=drive_link', '_blank')],
-    ['11th Class Smart Syllabus <span style="font-size:16px">⬇️</span>', () => window.open('https://drive.google.com/file/d/1mOB6A6Q0jyB3W3MXlP-56MmGxEurFBCz/view?usp=drive_link', '_blank')]
-  ]},
-   {t:'Class Notes', items: CL('Class Notes')},
-   {t:'Results', items: CL('Class Result')},
-   {t:'Matric/SSC Past Papers', items: [['9th Past Papers',INFO('9th Past Papers')],['10th Past Papers',INFO('10th Past Papers')]]},
-   {t:'Inter/HSSC Past Papers', items: [['11th Past Papers',INFO('11th Past Papers')],['12th Past Papers',INFO('12th Past Papers')]]}
- ];
-
- const catList = site.querySelector('#cat-list');
- catList.innerHTML = catData.map((c, i) => `
-   <button class="cat-btn" data-ci="${i}">${c.t} <span class="arrow">▼</span></button>
-   <div class="cat-sub" id="sub-${i}">
-     ${c.items.map((item, j) => `<button data-cat-fn="${i}" data-item-idx="${j}">${item[0]}</button>`).join('')}
-   </div>
- `).join('');
-
- catList.querySelectorAll('.cat-btn').forEach(b => {
-   b.onclick = () => {
-     const i = b.dataset.ci;
-     const sub = catList.querySelector('#sub-'+i);
-     const isOpen = sub.classList.contains('on');
-     catList.querySelectorAll('.cat-sub').forEach(x => x.classList.remove('on'));
-     catList.querySelectorAll('.cat-btn').forEach(x => x.classList.remove('on'));
-     if (!isOpen) { sub.classList.add('on'); b.classList.add('on'); }
-   };
- });
-
- catList.querySelectorAll('.cat-sub button').forEach(b => {
-   b.onclick = () => {
-     const cIdx = b.dataset.catFn;
-     const iIdx = b.dataset.itemIdx;
-     catData[cIdx].items[iIdx][1]();
-   };
- });
 
  $('#p-home').prepend(site);site.querySelectorAll('.lk').forEach(b=>b.onclick=()=>ALL[+b.dataset.c].l[+b.dataset.l][1]());
  // Accordion cards (desktop + mobile)
