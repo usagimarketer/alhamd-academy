@@ -272,6 +272,12 @@ nav button .ic svg,nav button svg{stroke:var(--mu)}nav button.on .ic svg,nav but
 /* Past Papers year tabs */
 .year-btn { padding: 8px 24px; border-radius: 20px; border: 1px solid var(--pr); font-weight: 700; }
 .year-btn.g { background: transparent; color: var(--pr); }
+.board-card{text-align:left;background:var(--accent-light);border:1px solid rgba(37,99,235,0.2);text-decoration:none;padding:20px;align-items:flex-start;color:var(--tx)}
+.board-card.soon{opacity:.65}
+.board-icon{background:var(--pr);color:#fff;width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;margin-bottom:10px}
+.board-subject{font-weight:700;font-size:16px;color:var(--tx)}
+.board-year{font-size:13px;color:var(--mu);margin-top:4px}
+.board-name{font-size:13px;font-weight:700;color:var(--pr);margin-top:2px}
 </style>
 </head>
 <body>
@@ -676,15 +682,20 @@ function renderPastPapersGrid(cls, subject, year, btnElement) {
     document.querySelectorAll('.year-btn').forEach(b => b.classList.add('g'));
     btnElement.classList.remove('g');
   }
+  const ABBR = {Physics:'Phy', Chemistry:'Chem', Biology:'Bio', Mathematics:'Math', English:'Eng'};
+  const short = (ABBR[subject] || subject) + '-' + parseInt(cls);
   let gridHtml = '';
-  PP_BOARDS.forEach(board => {
-    const url = ppUrl(cls, subject, year, board);
+  PP_BOARDS.forEach(boardName => {
+    const url = ppUrl(cls, subject, year, boardName);
     const ok = url !== '#';
-    gridHtml += `<a href="${url}" ${ok ? 'target="_blank" rel="noopener"' : 'onclick="event.preventDefault();toast(\'Is paper ka link jald add kiya jayega\')"'} class="sub-card" style="background:var(--accent-light); border:1px solid rgba(37,99,235,0.2); text-decoration:none; padding:20px; align-items:flex-start;${ok ? '' : ' opacity:.65;'}">
-      <div style="background:var(--pr); color:#fff; width:40px; height:40px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:bold; margin-bottom:10px;">PDF</div>
-      <div style="font-weight:700; color:var(--tx); font-size:16px;">${board}</div>
-      <div style="font-size:13px; color:var(--mu); margin-top:4px;">${year}${ok ? '' : ' · jald'}</div>
-    </a>`;
+    gridHtml += `<a href="${url}" ${ok ? 'target="_blank" rel="noopener"' : 'onclick="event.preventDefault();toast(\'Is paper ka link jald add kiya jayega\')"'} class="sub-card board-card${ok ? '' : ' soon'}">
+  <div class="board-icon">PDF</div>
+  <div class="board-details">
+    <div class="board-subject">${short}</div>
+    <div class="board-year">GI+GII-${year}</div>
+    <div class="board-name">${boardName}</div>
+  </div>
+</a>`;
   });
   $('#pp-grid').innerHTML = gridHtml;
 }
