@@ -286,6 +286,26 @@ nav button .ic svg,nav button svg{stroke:var(--mu)}nav button.on .ic svg,nav but
 .board-subject { font-weight: 700; color: var(--text-main); font-size: 15px; margin-bottom: 4px; }
 .board-year { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
 .board-name { font-weight: 700; color: var(--pr); font-size: 14px; background: var(--accent-light); padding: 4px 12px; border-radius: 20px; }
+/* ===== MOBILE APP FEEL (<=768px; desktop untouched) ===== */
+@media (max-width: 768px) {
+  html { font-size: 16px; }
+  body { overflow-x: hidden; line-height: 1.6; }
+  nav { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 9999; background: var(--bg); border-top: 1px solid var(--ln); }
+  #toast { z-index: 10000; }
+  .dd { z-index: 1100; }
+  .top, .top.dk { position: sticky; top: 0; z-index: 1000; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+  .top.dk button { padding: 10px 15px; }
+  .btn, .lk, .board-card, .year-btn { min-height: 44px; padding: 12px 16px; }
+  .year-btn { padding: 12px 24px; }
+  .hc2 .lk, .card .lk, .lk { font-size: 15px; }
+  .hg { grid-template-columns: 1fr; }
+  .hg > .hc2:first-child { grid-column: auto; grid-row: auto; }
+  .sub-grid { grid-template-columns: repeat(2, 1fr); }
+  .year-tabs { display: flex; flex-wrap: nowrap !important; overflow-x: auto; padding-bottom: 5px; -webkit-overflow-scrolling: touch; }
+  .year-tabs .year-btn { flex: 0 0 auto; }
+  .wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .paper { flex: none; max-width: none; zoom: 1 !important; } /* JS auto-fit zoom is overridden: paper keeps full size, user scrolls */
+}
 </style>
 </head>
 <body>
