@@ -650,6 +650,56 @@ const NOTES={
  }
 };
 function dId(u){const m=String(u).match(/\/d\/([\w-]+)/)||String(u).match(/[?&]id=([\w-]+)/);return m?m[1]:''}
+function openPastPapers(cls, subject) {
+  const data = PAST_PAPERS_DATA[subject] || {};
+  const years = Object.keys(data).sort((a,b)=>b-a); // newest year first
+  const currentYear = years.length > 0 ? years[0] : null;
+
+  let html = `<div class="card">
+    <div class="nbc"><button class="bcb" onclick="go('home')">Home</button> › <button class="bcb" onclick="INFO('${cls} Past Papers')()">Past Papers</button> › ${cls} ${subject}</div>
+    <h1 style="color:var(--tx); margin-bottom:20px;">${cls} ${subject} - Past Papers</h1>`;
+
+  if (!currentYear) {
+    html += `<p>No papers uploaded yet.</p></div>`;
+    $('#nb').innerHTML = html; go('notes'); return;
+  }
+
+  // Year Tabs
+  html += `<div class="year-tabs" style="display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap;">`;
+  years.forEach(y => {
+    html += `<button class="btn year-btn ${y === currentYear ? '' : 'g'}" onclick="renderPastPapersGrid('${subject}', '${y}', this)">${y}</button>`;
+  });
+  html += `</div>`;
+
+  // Grid Container
+  html += `<div id="pp-grid" class="sub-grid"></div></div>`;
+
+  $('#nb').innerHTML = html;
+  renderPastPapersGrid(subject, currentYear);
+  go('notes'); window.scrollTo(0,0);
+}
+
+function renderPastPapersGrid(subject, year, btnElement) {
+  if (btnElement) {
+    // Update active tab styling
+    document.querySelectorAll('.year-btn').forEach(b => b.classList.add('g'));
+    btnElement.classList.remove('g');
+  }
+
+  const papers = PAST_PAPERS_DATA[subject][year] || [];
+  let gridHtml = '';
+
+  papers.forEach(p => {
+    gridHtml += `<a href="${p.url}" target="_blank" rel="noopener" class="sub-card" style="background:var(--accent-light); border:1px solid rgba(37,99,235,0.2); text-decoration:none; padding:20px; align-items:flex-start;">
+      <div style="background:var(--pr); color:#fff; width:40px; height:40px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:bold; margin-bottom:10px;">PDF</div>
+      <div style="font-weight:700; color:var(--tx); font-size:16px;">${p.board}</div>
+      <div style="font-size:13px; color:var(--mu); margin-top:4px;">${p.group}</div>
+    </a>`;
+  });
+
+  $('#pp-grid').innerHTML = gridHtml;
+}
+
 function openNotes(p){
  let n=NOTES;for(const k of p)n=n[k];
  const bc=['Notes',...p].map((x,i)=>`<button class="bcb" data-b="${i}">${esc(x)}</button>`).join(' › ');
@@ -706,6 +756,7 @@ function openNotes(p){
  box.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{const i=+b.dataset.b;i===0?go('home'):openNotes(p.slice(0,i))});
  box.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{
    const sub = currentSubs[+b.dataset.k];
+   if(p.length===1 && /Past Papers$/.test(p[0])){openPastPapers(p[0].split(' ')[0], sub);return}
    if(p.length===1 && BOOKS[p[0]] && BOOKS[p[0]][sub]){openBook(BOOKS[p[0]][sub]);return}
    if(p.length===1 && p[0]==='9th Class Pairing' && sub==='Mathematics'){
      window.open('https://tinyurl.com/9-Math-Pairing-Scheme-2027','_blank','noopener');
