@@ -718,6 +718,18 @@ function openNotes(p){
  go('notes');window.scrollTo(0,0);
 }
 /* Class -> Subject -> book data. cover = image path, url = PDF download link, view = read-online link */
+const PAST_PAPERS_DATA = {
+  'Urdu': {
+    '2026': [
+      { board: 'BWP', url: 'https://drive.google.com/...', group: 'G1+G2' },
+      { board: 'DGK', url: 'https://drive.google.com/...', group: 'G1+G2' },
+      { board: 'FBD', url: 'https://drive.google.com/...', group: 'G1+G2' }
+    ],
+    '2024': [
+      { board: 'BWP', url: 'https://drive.google.com/...', group: 'BWP-24' }
+    ]
+  }
+};
 const BOOKS={
   '9th Text Book': {
     'Mathematics': {cls:'9th', title:'9th Class Mathematics', cover:'./images/9th-math-cover.jpg', url:'https://drive.google.com/uc?export=download&id=1MA2D2pgYCZRC-E83cncoClN0iS0I5SgL', view:'https://drive.google.com/file/d/1MA2D2pgYCZRC-E83cncoClN0iS0I5SgL/preview', size:'', author:'PCTB', views:'0', downloads:'0', updated:'12 Nov 2026', year:'', session:'2025-27', rating:5, overview:'Class 9 Mathematics textbook published by the Punjab Curriculum and Textbook Board (PCTB). Study the chapters, practise the exercises and prepare for your exams with the official course book.'},

@@ -136,3 +136,4 @@ Repo ka suggested layout:
 - 2026-11-13: 10th Text Book > Chemistry: Drive url + view links added (cover still empty).
 - 2026-11-13: 10th Chemistry cover set to ./images/10th-chemistry-cover.webp.
 - 2026-11-13: Performance: glass-break effect (CSS+JS) removed; Google Fonts trimmed to Noto Nastaliq Urdu, Poppins 600/700, Inter 400-700; book cover img lazy-loaded. NOTE: Paper Maker font choices Amiri/Naskh/Calibri(Carlito)/Cambria(Caladea)/Garamond/Old Standard TT now depend on fonts installed on the device.
+- 2026-11-14: Past Papers step 1: added PAST_PAPERS_DATA (sample Urdu 2026/2024, placeholder links) above BOOKS. Dashboard UI not built yet (waiting for next steps).
