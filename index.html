@@ -671,7 +671,7 @@ const CL=s=>['9th','10th','11th','12th'].map(x=>{const n=x+' '+s;return [n,INFO(
 const TB=['Punjab Text Books','Sindh Text Books','KPK Text Books','Federal Text Books','Balochistan Text Books','SNC Text Books'].map(n=>[n,INFO(n)]);
 TB[0][1]=openTextBooks;
 const SITE=[
- {t:'Smart Syllabus 2027', c:'#ef4444', k:'📑', l:[['9th Class Syllabus', () => window.open('https://drive.google.com/file/d/1Pyjevb4jM8RkniMj-XBjvL4_vrcTpJI6/view?usp=drive_link', '_blank')], ['11th Class Syllabus', () => window.open('https://drive.google.com/file/d/1mOB6A6Q0jyB3W3MXlP-56MmGxEurFBCz/view?usp=drive_link', '_blank')]]},
+ {t:'Smart Syllabus 2027', c:'#ef4444', k:'📑', l:[['9th Class Syllabus', () => window.open('https://drive.google.com/file/d/1Pyjevb4jM8RkniMj-XBjvL4_vrcTpJI6/view?usp=drive_link', '_blank')], ['10th Class Syllabus', () => toast('10th Syllabus ka link jald add kiya jayega')], ['11th Class Syllabus', () => window.open('https://drive.google.com/file/d/1mOB6A6Q0jyB3W3MXlP-56MmGxEurFBCz/view?usp=drive_link', '_blank')], ['12th Class Syllabus', () => toast('12th Syllabus ka link jald add kiya jayega')]]},
  {t:'Pairing Schemes',c:'#9c27b0',k:'📋',l:CL('Class Pairing')},
  {t:'Model Papers', c:'#f59e0b', k:'📝', l:CL('Model Papers')},
  {t:'Test Series',c:'#2196f3',k:'📝',l:CL('Test Series')},
@@ -680,7 +680,7 @@ const SITE=[
  {t:'Past Papers',c:'#e91e63',k:'📑',l:CL('Past Papers')},
  {t:'Results',c:'#10b981',k:'📊',l:CL('Class Result')}];
 const PMF=[['💎 Paid Service (WhatsApp)',()=>window.open('https://wa.me/923040947667?text=Assalam%20o%20Alaikum%20Sir,%20I%20want%20to%20know%20about%20the%20Paid%20Paper%20Maker%20Service.','_blank','noopener')],['Free Service',()=>window.open('https://paperdesk.whisperperks.com/','_blank','noopener')]];
-const NAV=[{t:'Text Books',l:TB},{t:'Notes',l:CL('Class Notes')},{t:'Pairing Schemes',l:CL('Class Pairing')},{t:'Test Series',l:CL('Test Series')},{t:'Past Papers',l:CL('Past Papers')},{t:'Results',l:CL('Class Result')},{t:'Paper Maker',l:PMF}];
+const NAV=SITE; // same order as home cards
 const ALL=SITE;
 function buildSite(){const top=$('.top');top.className='top dk';
  const ob=$('.brand');if(ob)ob.remove();
@@ -688,11 +688,11 @@ function buildSite(){const top=$('.top');top.className='top dk';
  top.innerHTML=`<button class="hm on" id="hmb" title="Home">${sv(`<path d='M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10'/>`)}</button>`+NAV.map((c,i)=>`<button data-m="${i}">${c.t} ▾</button>`).join('')+`<span style="flex:1"></span><input id="sri" class="sri" placeholder="Search…" hidden><button id="srb" title="Search">${sv(`<circle cx='11' cy='11' r='7'/><path d='M21 21l-5-5'/>`)}</button>`;
  const od=document.querySelector('.dd');if(od)od.remove();
  const dd=document.createElement('div');dd.className='dd';dd.hidden=true;document.body.append(dd);
- top.querySelectorAll('[data-m]').forEach(b=>b.onclick=e=>{e.stopPropagation();const c=NAV[+b.dataset.m],r=b.getBoundingClientRect();dd.innerHTML='';c.l.forEach(([n,f])=>{const x=document.createElement('button');x.textContent=n;x.onclick=()=>{dd.hidden=true;f()};dd.append(x)});dd.style.left=Math.max(0,Math.min(r.left,innerWidth-200))+'px';dd.style.top=r.bottom+'px';dd.hidden=false});
+ top.querySelectorAll('[data-m]').forEach(b=>b.onclick=e=>{e.stopPropagation();const c=NAV[+b.dataset.m],r=b.getBoundingClientRect();dd.innerHTML='';c.l.forEach(([n,f])=>{const x=document.createElement('button');x.textContent=n+(/Class Syllabus/.test(n)?' 🔥 New':'');x.onclick=()=>{dd.hidden=true;f()};dd.append(x)});dd.style.left=Math.max(0,Math.min(r.left,innerWidth-200))+'px';dd.style.top=r.bottom+'px';dd.hidden=false});
  document.addEventListener('click',()=>{dd.hidden=true});$('#hmb').onclick=()=>go('home');
  const si=$('#sri');$('#srb').onclick=e=>{e.stopPropagation();si.hidden=!si.hidden;if(!si.hidden)si.focus()};si.onclick=e=>e.stopPropagation();
  si.oninput=()=>{go('home');const q=si.value.trim().toLowerCase();document.querySelectorAll('#site .lk').forEach(b=>{b.style.display=(!q||b.textContent.toLowerCase().includes(q))?'':'none'});document.querySelectorAll('#site .hc2').forEach(c=>{c.style.display=(!q||[...c.querySelectorAll('.lk')].some(b=>b.style.display!=='none'))?'':'none'})};
- const card=(c,i)=>{const hl=c.t.includes('Smart Syllabus');return `<div class="hc2${hl?' highlight-card':''}" style="--c:${c.c}">${circ(c.k,c.c)}<h3>${c.t}${hl?' <span style="background:#ef4444; color:#fff; font-size:10px; padding:2px 6px; border-radius:4px; margin-left:8px;">🔥 Important</span>':''} <span class="toggle-icon" style="float:right; font-size:12px;">▼</span></h3><div class="link-list">${c.l.map((l,j)=>`<button class="lk" data-c="${i}" data-l="${j}">${l[0]}</button>`).join('')}</div></div>`};
+ const card=(c,i)=>{const hl=c.t.includes('Smart Syllabus');return `<div class="hc2${hl?' highlight-card':''}" style="--c:${c.c}">${circ(c.k,c.c)}<h3>${c.t}${hl?' <span style="background:#ef4444; color:#fff; font-size:10px; padding:2px 6px; border-radius:4px; margin-left:8px;">🔥 New</span>':''} <span class="toggle-icon" style="float:right; font-size:12px;">▼</span></h3><div class="link-list">${c.l.map((l,j)=>`<button class="lk" data-c="${i}" data-l="${j}">${l[0]}${hl?' <span style="background:#ef4444; color:#fff; font-size:10px; padding:2px 6px; border-radius:4px; margin-left:8px;">🔥 New</span>':''}</button>`).join('')}</div></div>`};
  const os=$('#site');if(os)os.remove();
  const site=document.createElement('div');site.id='site';
  const scr=i=>`document.querySelectorAll('#site .hc2')[${i}].scrollIntoView({behavior:'smooth',block:'center'})`;
