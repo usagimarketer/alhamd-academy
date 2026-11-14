@@ -349,14 +349,16 @@ html, body{ overflow-x: hidden; max-width: 100vw; width: 100%; }
 .search-item:hover{ background: var(--accent-light); color: var(--pr); }
 .search-item{ display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 .search-item small{ color: var(--mu); font-size: 12px; font-weight: 500; flex: none; }
-/* ===== Mobile accordion cards (desktop untouched) ===== */
-.toggle-icon { display: none; }
-@media (max-width: 768px) {
-  .sidebar { display: none !important; }
-  .toggle-icon { display: inline; }
-  .hc2 { cursor: pointer; }
-  .hc2 .link-list { display: none; }
-  .hc2.expanded .link-list { display: flex; flex-direction: column; margin-top: 10px; }
+/* ===== Accordion cards (desktop + mobile) ===== */
+.hc2 { cursor: pointer; padding: 15px; }
+.hc2 .link-list { display: none; }
+.hc2.expanded .link-list { display: flex; flex-direction: column; margin-top: 10px; }
+.hc2:not(.expanded) h3 { margin-bottom: 0; }
+.hc2 .ci { width: 40px; height: 40px; margin-bottom: 8px; }
+.hc2 .ci svg { width: 22px; height: 22px; }
+@media (min-width: 769px) {
+  .hg { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .hg > .hc2:first-child { grid-column: auto; grid-row: auto; align-self: start; }
 }
 </style>
 </head>
@@ -765,22 +767,19 @@ function buildSite(){const top=$('.top');top.className='top dk';
  });
 
  $('#p-home').prepend(site);site.querySelectorAll('.lk').forEach(b=>b.onclick=()=>ALL[+b.dataset.c].l[+b.dataset.l][1]());
- // Accordion cards (mobile only)
+ // Accordion cards (desktop + mobile)
  site.querySelectorAll('.hc2').forEach(card => {
    card.addEventListener('click', function(e) {
-     // Only run on mobile screens
-     if (window.innerWidth <= 768) {
-       // Prevent triggering if a link inside was clicked
-       if (e.target.closest('.lk')) return; 
+     // Prevent triggering if a link inside was clicked
+     if (e.target.closest('.lk')) return; 
 
-       // Toggle the expanded class
-       this.classList.toggle('expanded');
+     // Toggle the expanded class
+     this.classList.toggle('expanded');
 
-       // Change the icon direction
-       const icon = this.querySelector('.toggle-icon');
-       if (icon) {
-         icon.textContent = this.classList.contains('expanded') ? '▲' : '▼';
-       }
+     // Change the icon direction
+     const icon = this.querySelector('.toggle-icon');
+     if (icon) {
+       icon.textContent = this.classList.contains('expanded') ? '▲' : '▼';
      }
    });
  });

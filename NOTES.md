@@ -152,3 +152,4 @@ Repo ka suggested layout:
 - 2026-11-14: Paper Maker menu > Free Service now opens https://paperdesk.whisperperks.com/ in a new tab (Paid Service still "Coming soon").
 - 2026-11-14: Paper Maker menu > Paid Service opens WhatsApp 923040947667 with a pre-filled message (new tab).
 - 2026-11-14: Mobile (<=768px): sidebar hidden, home category cards are accordions (.link-list wrapper added in card template, .toggle-icon chevron, click handler in buildSite). Desktop unchanged. NOTE: Smart Syllabus Exam 2027 links exist only in the sidebar, so they are not reachable on mobile now.
+- 2026-11-14: Accordion home cards on desktop AND mobile (compact: 15px padding, 40px icon, auto-fill 200px grid; bento span removed on desktop). Sidebar visible again on all devices (its categories were already collapsible).
