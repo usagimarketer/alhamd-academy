@@ -164,3 +164,4 @@ Repo ka suggested layout:
 - 2026-11-15: Badge ab emoji ke baghair gradient pill '.new-badge' (NEW) — card title, syllabus links, nav dropdown.
 - 2026-11-15: Paper Maker wapas main card (SITE ke aakhir mein; Paid WhatsApp + Free PaperDesk links); purana PMF const hata diya; nav mein bhi aa gaya (NAV=SITE).
 - 2026-11-15: Smart Syllabus 10th ka asli Drive link add (12th abhi baqi).
+- 2026-11-15: SEO: og:image + twitter:image = images/social-preview.png (1200x630 tags). NOTE: image file repo mein push hona baqi tha.
