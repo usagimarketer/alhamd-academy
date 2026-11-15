@@ -167,3 +167,4 @@ Repo ka suggested layout:
 - 2026-11-15: SEO: og:image + twitter:image = images/social-preview.png (1200x630 tags). NOTE: image file repo mein push hona baqi tha.
 - 2026-11-15: og:image/twitter:image ab social-preview.jpg (1200x630, repo mein maujood).
 - 2026-11-15: Text Books card/menu mein sirf 'Punjab Text Books' (Sindh/KPK/Federal/Balochistan/SNC hata diye).
+- 2026-11-15: Home cards ab exclusive accordion (naya card kholne par purana band, ▼/▲ reset, link click card band nahi karta).

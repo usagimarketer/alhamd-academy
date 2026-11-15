@@ -744,13 +744,17 @@ function buildSite(){const top=$('.top');top.className='top dk';
      // Prevent triggering if a link inside was clicked
      if (e.target.closest('.lk')) return; 
 
-     // Toggle the expanded class
-     this.classList.toggle('expanded');
-
-     // Change the icon direction
-     const icon = this.querySelector('.toggle-icon');
-     if (icon) {
-       icon.textContent = this.classList.contains('expanded') ? '▲' : '▼';
+     // Exclusive accordion: close all, then open the clicked one if it was closed
+     const wasOpen = this.classList.contains('expanded');
+     site.querySelectorAll('.hc2').forEach(c => {
+       c.classList.remove('expanded');
+       const ic = c.querySelector('.toggle-icon');
+       if (ic) ic.textContent = '▼';
+     });
+     if (!wasOpen) {
+       this.classList.add('expanded');
+       const icon = this.querySelector('.toggle-icon');
+       if (icon) icon.textContent = '▲';
      }
    });
  });
