@@ -483,6 +483,10 @@ function openNotes(p){
      window.open('https://tinyurl.com/9-Math-Pairing-Scheme-2027','_blank','noopener');
      return;
    }
+   if(p.length===1 && p[0]==='10th Class Pairing' && sub==='Mathematics'){
+     window.open('https://drive.google.com/file/d/1TfmtX1SNXl24gi47PoIYjpj0hlMlNKk-/view?usp=drive_link','_blank','noopener');
+     return;
+   }
    if(!n[sub]) n[sub] = {};
    openNotes([...p, sub]);
  });

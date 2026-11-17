@@ -170,3 +170,4 @@ Repo ka suggested layout:
 - 2026-11-15: Home cards ab exclusive accordion (naya card kholne par purana band, ▼/▲ reset, link click card band nahi karta).
 - 2026-11-15: Inner links (.lk) premium style: translucent bg, light blue border, hover gradient + slide 4px (CSS style ke aakhir mein).
 - 2026-11-15: Smart Syllabus 12th ka asli Drive link add (ab 9th/10th/11th/12th sab links lage).
+- 2026-11-17: 10th Class Pairing > Mathematics ka Drive link add (openNotes mein, 9th wale block ke baad).
